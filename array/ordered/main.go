@@ -20,10 +20,7 @@ func (this *array) Insert(elem int64) bool {
 			break
 		}
 	}
-
-	
-
-	for j := this.len; j >= i; j-- {
+	for j := this.len - 1; j >= i; j-- {
 		this.data[j+1] = this.data[j]
 	}
 
@@ -32,7 +29,7 @@ func (this *array) Insert(elem int64) bool {
 	return true
 }
 
-func (this *array) Find(elem int64) int {
+func (this *array) LinearSearch(elem int64) int {
 	for i := 0; i < this.len; i++ {
 		if this.data[i] == elem {
 			return i
@@ -43,8 +40,27 @@ func (this *array) Find(elem int64) int {
 	return -1
 }
 
+func (this *array) BinarySearch(elem int64) int {
+	var currentIn int
+	lowerBound := 0
+	upperBound := this.len - 1
+
+	for {
+		currentIn = (lowerBound + upperBound) / 2
+		if this.data[currentIn] == elem {
+			return currentIn
+		} else if lowerBound > upperBound {
+			return -1
+		} else if this.data[currentIn] < elem {
+			lowerBound = currentIn + 1
+		} else if this.data[currentIn] > elem {
+			upperBound = currentIn - 1
+		}
+	}
+}
+
 func (this *array) Delete(elem int64) bool {
-	i := this.Find(elem)
+	i := this.BinarySearch(elem)
 	if i == -1 {
 		return false
 	}
@@ -53,6 +69,15 @@ func (this *array) Delete(elem int64) bool {
 		this.data[j] = this.data[j+1]
 	}
 	return true
+}
+
+func (this *array) Reverse() {
+	var temp int64
+	for i := 0; i < this.len/2; i++ {
+		temp = this.data[i]
+		this.data[i] = this.data[this.len-i-1]
+		this.data[this.len-i-1] = temp
+	}
 }
 
 func (this *array) GetData() []int64 {
