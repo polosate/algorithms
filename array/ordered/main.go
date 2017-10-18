@@ -73,7 +73,7 @@ func (this *array) Delete(elem int64) bool {
 
 func (this *array) Reverse() {
 	var temp int64
-	for i := 0; i < this.len/2; i++ {
+	for i := 0; i*2 < this.len; i++ {
 		temp = this.data[i]
 		this.data[i] = this.data[this.len-i-1]
 		this.data[this.len-i-1] = temp
