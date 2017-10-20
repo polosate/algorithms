@@ -1,5 +1,9 @@
 package inserting
 
+import (
+	"fmt"
+)
+
 type array struct {
 	data []int64
 	len  int
@@ -18,10 +22,80 @@ func (this *array) Insert(elem int64) bool {
 	return true
 }
 
-// 4 6 2 1 8 4 2
+// 22 77 44 33 66 55 11 111 1 34
+// 5 6 7 1 8 4 3
+func binarySearch(array []int64, el int64) int {
+	lowerBound := 0
+	upperBound := len(array) - 1
+	for {
+		curIn := (lowerBound + upperBound) / 2
+		if el > array[curIn] && (len(array) == 1 || el < array[curIn+1]) {
+			curIn++
+			return curIn
+		} else if el < array[curIn] && (len(array) == 1 || el > array[curIn-1]) {
+			curIn--
+			return curIn
+		} else if el > array[curIn] {
+			lowerBound = curIn + 1
+		} else if el < array[curIn] {
+			upperBound = curIn - 1
+		}
+	}
+}
+
+func (this *array) Median() float64 {
+	this.InsertingSort()
+	if this.len%2 == 0 {
+		return float64(this.data[this.len/2]+this.data[this.len/2-1]) / 2
+	} else {
+		return float64(this.data[this.len/2])
+	}
+}
+
+// 1 1 1 2 3 4 5 5 6 6
+func (this *array) NoDups() {
+	this.InsertingSort()
+
+	for i := 0; i < this.len-1; {
+		shift := 0
+		for (i+shift+1) < this.len && this.data[i] == this.data[i+shift+1] {
+			this.data[i+shift+1] = -1
+			shift++
+			fmt.Println(this.GetData())
+		}
+		i++
+		i = i + shift
+	}
+}
+
+func (this *array) InsertingSortWithBinarySearch() {
+	var temp int64
+
+	for i := 1; i < this.len; i++ {
+		temp = this.data[i]
+		insertIn := binarySearch(this.data[0:i], temp)
+		for j := insertIn; j < i; j++ {
+			this.data[j+1] = this.data[j]
+		}
+		this.data[insertIn] = temp
+	}
+}
 
 func (this *array) InsertingSort() {
-
+	var tempIn int
+	var temp int64
+	for i := 1; i < this.len; i++ {
+		tempIn = i
+		temp = this.data[tempIn]
+		for j := i - 1; j >= 0; j-- {
+			if this.data[j] < temp {
+				break
+			}
+			this.data[j+1] = this.data[j]
+			tempIn = j
+		}
+		this.data[tempIn] = temp
+	}
 }
 
 func (this *array) GetData() []int64 {
