@@ -1,7 +1,6 @@
 package inserting
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
 )
@@ -112,8 +111,10 @@ func Test_NoDups(t *testing.T) {
 	array.Insert(6)
 
 	array.NoDups()
-	fmt.Println(array.GetData())
-	//if !reflect.DeepEqual(m, float64(3)) {
-	//	t.Error("expected array", float64(3), "have array", m)
-	//}
+	res := array.GetData()
+	expected := []int64{1, 2, 3, 4, 5, 6}
+	res = array.GetData()
+	if !reflect.DeepEqual(res, expected) {
+		t.Error("expected array", expected, "have array", res)
+	}
 }
