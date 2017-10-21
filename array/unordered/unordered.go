@@ -1,4 +1,4 @@
-package simple
+package array
 
 type array struct {
 	data []int64

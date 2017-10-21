@@ -10,7 +10,7 @@ type abstractStack struct {
 	data []interface{}
 }
 
-func newStack(size int) *abstractStack {
+func newAbstractStack(size int) *abstractStack {
 	return &abstractStack{
 		size: size,
 		top:  -1,
@@ -20,7 +20,7 @@ func newStack(size int) *abstractStack {
 
 func (s *abstractStack) push(elem interface{}) error {
 	if s.isFull() {
-		return errors.New("abstractStack is full")
+		return errors.New("stack is full")
 	} else {
 		s.top++
 		s.data[s.top] = elem
@@ -30,7 +30,7 @@ func (s *abstractStack) push(elem interface{}) error {
 
 func (s *abstractStack) pop() (interface{}, error) {
 	if s.isEmpty() {
-		return -1, errors.New("abstractStack is empty")
+		return -1, errors.New("stack is empty")
 	}
 	el := s.data[s.top]
 	s.top--
@@ -39,7 +39,7 @@ func (s *abstractStack) pop() (interface{}, error) {
 
 func (s *abstractStack) peek() (interface{}, error) {
 	if s.isEmpty() {
-		return -1, errors.New("abstractStack is empty")
+		return -1, errors.New("stack is empty")
 	}
 	return s.data[s.top], nil
 }

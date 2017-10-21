@@ -12,8 +12,8 @@ func TestIntStack(t *testing.T) {
 	}
 
 	el, err := stack.Pop()
-	if err.Error() != "abstractStack is empty" {
-		t.Error("expected err", "abstractStack is empty", "have", err.Error())
+	if err.Error() != "stack is empty" {
+		t.Error("expected err", "stack is empty", "have", err.Error())
 	}
 
 	stack.Push(22)
@@ -32,8 +32,8 @@ func TestIntStack(t *testing.T) {
 	stack.Push(55)
 
 	err = stack.Push(66)
-	if err.Error() != "abstractStack is full" {
-		t.Error("expected err", "abstractStack is full", "have", err.Error())
+	if err.Error() != "stack is full" {
+		t.Error("expected err", "stack is full", "have", err.Error())
 	}
 
 	if !stack.IsFull() {

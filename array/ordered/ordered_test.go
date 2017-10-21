@@ -1,4 +1,4 @@
-package simple
+package array
 
 import (
 	"reflect"
@@ -9,18 +9,18 @@ func Test(t *testing.T) {
 	array := newArray(10)
 
 	// Insert elements
-	array.Insert(10)
-	array.Insert(55)
-	array.Insert(7)
-	array.Insert(18)
-	array.Insert(89)
+	array.Insert(22)
+	array.Insert(77)
+	array.Insert(44)
 	array.Insert(33)
 	array.Insert(66)
+	array.Insert(55)
 	array.Insert(11)
-	array.Insert(84)
-	array.Insert(99)
+	array.Insert(111)
+	array.Insert(15)
+	array.Insert(34)
 
-	expected := []int64{10, 55, 7, 18, 89, 33, 66, 11, 84, 99}
+	expected := []int64{11, 15, 22, 33, 34, 44, 55, 66, 77, 111}
 	res := array.GetData()
 	if !reflect.DeepEqual(res, expected) {
 		t.Error("expected array", expected, "have array", res)
@@ -35,10 +35,10 @@ func Test(t *testing.T) {
 		t.Error("expected inserted", false, "have array", inserted)
 	}
 
-	// Find element
-	index := array.Find(55)
-	if index != 1 {
-		t.Error("expected index", 1, "have index", index)
+	// BinarySearch element
+	index := array.BinarySearch(55)
+	if index != 6 {
+		t.Error("expected index", 6, "have index", index)
 	}
 
 	// Delete nonexistent element
@@ -48,11 +48,11 @@ func Test(t *testing.T) {
 	}
 
 	// Delete middle element
-	deleted = array.Delete(89)
+	deleted = array.Delete(44)
 	if !deleted {
 		t.Error("expected deleted", true, "have deleted", deleted)
 	}
-	expected = []int64{10, 55, 7, 18, 33, 66, 11, 84, 99}
+	expected = []int64{11, 15, 22, 33, 34, 55, 66, 77, 111}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
 		t.Error("expected array", expected, "have array", res)
@@ -62,11 +62,11 @@ func Test(t *testing.T) {
 	}
 
 	// Delete first element
-	deleted = array.Delete(10)
+	deleted = array.Delete(11)
 	if !deleted {
 		t.Error("expected deleted", true, "have deleted", deleted)
 	}
-	expected = []int64{55, 7, 18, 33, 66, 11, 84, 99}
+	expected = []int64{15, 22, 33, 34, 55, 66, 77, 111}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
 		t.Error("expected array", expected, "have array", res)
@@ -76,11 +76,11 @@ func Test(t *testing.T) {
 	}
 
 	// Delete last element
-	deleted = array.Delete(99)
+	deleted = array.Delete(111)
 	if !deleted {
 		t.Error("expected deleted", true, "have deleted", deleted)
 	}
-	expected = []int64{55, 7, 18, 33, 66, 11, 84}
+	expected = []int64{15, 22, 33, 34, 55, 66, 77}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
 		t.Error("expected array", expected, "have array", res)
@@ -90,12 +90,12 @@ func Test(t *testing.T) {
 	}
 
 	// Insert element again
-	inserted = array.Insert(111)
+	inserted = array.Insert(56)
 	if !inserted {
 		t.Error("expected inserted", true, "have array", inserted)
 	}
 
-	expected = []int64{55, 7, 18, 33, 66, 11, 84, 111}
+	expected = []int64{15, 22, 33, 34, 55, 56, 66, 77}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
 		t.Error("expected array", expected, "have array", res)
@@ -103,4 +103,20 @@ func Test(t *testing.T) {
 	if array.GetLen() != 8 {
 		t.Error("expected len", 8, "have array", array.GetLen())
 	}
+
+	// Reverse
+	expected = []int64{77, 66, 56, 55, 34, 33, 22, 15}
+	array.Reverse()
+	res = array.GetData()
+	if !reflect.DeepEqual(res, expected) {
+		t.Error("expected array", expected, "have array", res)
+	}
+	deleted = array.Delete(55)
+	expected = []int64{15, 22, 33, 34, 56, 66, 77}
+	array.Reverse()
+	res = array.GetData()
+	if !reflect.DeepEqual(res, expected) {
+		t.Error("expected array", expected, "have array", res)
+	}
+
 }

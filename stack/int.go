@@ -11,7 +11,7 @@ type intStack struct {
 
 func NewIntStack(size int) *intStack {
 	return &intStack{
-		newStack(size),
+		newAbstractStack(size),
 	}
 }
 
@@ -41,10 +41,10 @@ func (s *intStack) Peek() (int64, error) {
 	}
 }
 
-func (this *intStack) IsEmpty() bool {
-	return this.abstractStack.isEmpty()
+func (s *intStack) IsEmpty() bool {
+	return s.abstractStack.isEmpty()
 }
 
-func (this *intStack) IsFull() bool {
-	return this.abstractStack.isFull()
+func (s *intStack) IsFull() bool {
+	return s.abstractStack.isFull()
 }

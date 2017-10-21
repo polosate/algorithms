@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_UnarySearch(t *testing.T) {
+func TestUnarySearch(t *testing.T) {
 	array := newArray(10)
 
 	// Insert elements
@@ -67,7 +67,7 @@ func Test_UnarySearch(t *testing.T) {
 //	}
 //}
 
-func Test_Median_Even(t *testing.T) {
+func TestMedianEven(t *testing.T) {
 	array := newArray(4)
 
 	array.Insert(1)
@@ -81,7 +81,7 @@ func Test_Median_Even(t *testing.T) {
 	}
 }
 
-func Test_Median_Odd(t *testing.T) {
+func TestMedianOdd(t *testing.T) {
 	array := newArray(5)
 
 	array.Insert(1)
@@ -96,7 +96,7 @@ func Test_Median_Odd(t *testing.T) {
 	}
 }
 
-func Test_NoDups(t *testing.T) {
+func TestNoDups(t *testing.T) {
 	array := newArray(10)
 
 	array.Insert(1)
