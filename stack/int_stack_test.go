@@ -4,16 +4,16 @@ import (
 	"testing"
 )
 
-func Test(t *testing.T) {
-	stack := newStack(5)
+func TestIntStack(t *testing.T) {
+	stack := NewIntStack(5)
 
 	if !stack.IsEmpty() {
 		t.Error("expected IsEmpty", true, "have", false)
 	}
 
 	el, err := stack.Pop()
-	if err.Error() != "stack is empty" {
-		t.Error("expected err", "stack is empty", "have", err.Error())
+	if err.Error() != "abstractStack is empty" {
+		t.Error("expected err", "abstractStack is empty", "have", err.Error())
 	}
 
 	stack.Push(22)
@@ -32,8 +32,8 @@ func Test(t *testing.T) {
 	stack.Push(55)
 
 	err = stack.Push(66)
-	if err.Error() != "stack is full" {
-		t.Error("expected err", "stack is full", "have", err.Error())
+	if err.Error() != "abstractStack is full" {
+		t.Error("expected err", "abstractStack is full", "have", err.Error())
 	}
 
 	if !stack.IsFull() {
@@ -42,7 +42,7 @@ func Test(t *testing.T) {
 
 	el, err = stack.Pop()
 	if err != nil {
-		t.Error("expected error", nil, "have error", err.Error())
+		t.Error("expected error", nil, "have", err.Error())
 	}
 	if el != int64(55) {
 		t.Error("expected element", 55, "have", el)

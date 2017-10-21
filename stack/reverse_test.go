@@ -4,6 +4,6 @@ import (
 	"testing"
 )
 
-func Test_Reverse(t *testing.T) {
+func TestReverse(t *testing.T) {
 
 }
