@@ -1,4 +1,4 @@
-package array
+package ordered
 
 type array struct {
 	data []int64
