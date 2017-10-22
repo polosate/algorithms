@@ -35,7 +35,7 @@ func (s *byteStack) Peek() (byte, error) {
 		return 0, err
 	}
 	if byteEl, ok := el.(byte); !ok {
-		return 0, errors.New(fmt.Sprintf("received incompatibles type: value %v, type^ %T", byteEl, byteEl))
+		return 0, errors.New(fmt.Sprintf("received incompatibles type: value %v, type %T", el, el))
 	} else {
 		return byteEl, nil
 	}

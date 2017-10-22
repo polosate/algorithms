@@ -35,7 +35,7 @@ func (s *intStack) Peek() (int64, error) {
 		return -1, err
 	}
 	if intEl, ok := el.(int64); !ok {
-		return -1, errors.New(fmt.Sprintf("received incompatibles type: value %v, type^ %T", intEl, intEl))
+		return -1, errors.New(fmt.Sprintf("received incompatibles type: value %v, type %T", el, el))
 	} else {
 		return int64(intEl), nil
 	}
