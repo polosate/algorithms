@@ -42,6 +42,10 @@ func TestAbstractWithCounter(t *testing.T) {
 	if !reflect.DeepEqual(el, 2) {
 		t.Error("Expected el", 2, "actual", el)
 	}
+	el, err = q.peek()
+	if !reflect.DeepEqual(el, 3) {
+		t.Error("Expected el", 3, "actual", el)
+	}
 	el, err = q.remove()
 	if !reflect.DeepEqual(el, 3) {
 		t.Error("Expected el", 3, "actual", el)

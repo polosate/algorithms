@@ -52,12 +52,7 @@ func (q *abstractQueue) peek() (interface{}, error) {
 	if q.isEmpty() {
 		return nil, errors.New("queue is empty")
 	}
-	if q.front == q.maxSize {
-		q.front = 0
-	}
-	el := q.data[q.front]
-	q.data[q.front] = 0
-	return el, nil
+	return q.data[q.front], nil
 }
 
 func (q *abstractQueue) isFull() bool {

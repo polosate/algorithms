@@ -13,7 +13,7 @@ type abstractQueueWoCounter struct {
 
 func newAbstractQueueWoCounter(size int) *abstractQueueWoCounter {
 	return &abstractQueueWoCounter{
-		maxSize: size,
+		maxSize: size + 1,
 		front:   0,
 		rear:    0,
 		data:    make([]interface{}, size+1),
@@ -32,7 +32,6 @@ func (q *abstractQueueWoCounter) insert(elem interface{}) error {
 	return nil
 }
 
-// 1 2 3 4 0 0
 func (q *abstractQueueWoCounter) remove() (interface{}, error) {
 	if q.isEmpty() {
 		return nil, errors.New("queue is empty")
@@ -49,20 +48,21 @@ func (q *abstractQueueWoCounter) peek() (interface{}, error) {
 	if q.isEmpty() {
 		return nil, errors.New("queue is empty")
 	}
-	if q.front == q.maxSize {
-		q.front = 0
-	}
 	return q.data[q.front], nil
 }
 
 func (q *abstractQueueWoCounter) isFull() bool {
-	return false
+	return q.size()+1 == q.maxSize
 }
 
 func (q *abstractQueueWoCounter) isEmpty() bool {
-	return false
+	return q.size() == 0
 }
 
 func (q *abstractQueueWoCounter) size() int {
-	return -1
+	if q.rear >= q.front {
+		return q.rear - q.front
+	} else {
+		return q.maxSize - q.front + q.rear
+	}
 }
