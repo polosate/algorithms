@@ -20,7 +20,7 @@ func TestBracketsNotEnoughBrackets(t *testing.T) {
 
 func TestBracketsIncorrectBracket(t *testing.T) {
 	err := BracketsChecker("s{sds{s} m[sss(s}ss]sd}")
-	if err.Error() != "incorrect closing bracket" {
-		t.Error("expected err", "incorrect closing bracket", "have", err.Error())
+	if err.Error() != "expected ), but received } in 16" {
+		t.Error("expected err", "have expected ), but received } in 16", "have", err.Error())
 	}
 }

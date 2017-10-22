@@ -24,7 +24,8 @@ func BracketsChecker(s string) error {
 			if (string(inputChar) == "}" && string(stackChar) != "{") ||
 				(string(inputChar) == ")" && string(stackChar) != "(") ||
 				(string(inputChar) == "]" && string(stackChar) != "[") {
-				return errors.New("incorrect closing bracket")
+				return errors.New(fmt.Sprintf("expected %s, but received %s in %d",
+					reverseBracket(stackChar), string(inputChar), i))
 			}
 		default:
 			break
@@ -34,4 +35,17 @@ func BracketsChecker(s string) error {
 		return errors.New("not enough closing brackets")
 	}
 	return nil
+}
+
+func reverseBracket(char byte) string {
+	switch string(char) {
+	case "{":
+		return "}"
+	case "(":
+		return ")"
+	case "[":
+		return "]"
+	default:
+		return "xxx"
+	}
 }
