@@ -13,6 +13,11 @@ func TestPriorityQueue(t *testing.T) {
 	q.insert(2)
 	q.insert(1)
 	q.insert(4)
+	q.insert(7)
+	err := q.insert(9)
+	if err.Error() != "queue is full" {
+		t.Error("Expected err", "queue is full", "actual", err.Error())
+	}
 
 	el, err := q.remove()
 	if err != nil {
@@ -44,5 +49,18 @@ func TestPriorityQueue(t *testing.T) {
 	}
 	if el != 5 {
 		t.Error("Expected el", 5, "actual", el)
+	}
+
+	el, err = q.remove()
+	if err != nil {
+		t.Error("Expected err", nil, "actual", err.Error())
+	}
+	if el != 7 {
+		t.Error("Expected el", 7, "actual", el)
+	}
+
+	_, err = q.remove()
+	if err.Error() != "queue is empty" {
+		t.Error("Expected err", "queue is empty", "actual", err.Error())
 	}
 }

@@ -1,8 +1,8 @@
-**Bubble**
+**Bubble**  
 `O(N^2)`
 
-**Select**
+**Select**  
 `O(N^2)`
 
-**Insert**
+**Insert**  
 `O(N^2)`
