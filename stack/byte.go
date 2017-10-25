@@ -6,7 +6,7 @@ import (
 )
 
 type byteStack struct {
-	*abstractStack
+	abstractStack
 }
 
 func NewByteStack(size int) byteStack {

@@ -10,8 +10,8 @@ type priorityQueue struct {
 	data    []int64
 }
 
-func NewPriorityQueue(size int) *priorityQueue {
-	return &priorityQueue{
+func NewPriorityQueue(size int) priorityQueue {
+	return priorityQueue{
 		maxSize: size,
 		nItems:  0,
 		data:    make([]int64, size),

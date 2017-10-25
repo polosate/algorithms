@@ -10,8 +10,8 @@ type abstractStack struct {
 	data []interface{}
 }
 
-func newAbstractStack(size int) *abstractStack {
-	return &abstractStack{
+func newAbstractStack(size int) abstractStack {
+	return abstractStack{
 		size: size,
 		top:  -1,
 		data: make([]interface{}, size),

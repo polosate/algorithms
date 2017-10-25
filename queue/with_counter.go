@@ -12,8 +12,8 @@ type abstractQueue struct {
 	data    []interface{}
 }
 
-func newAbstractQueue(size int) *abstractQueue {
-	return &abstractQueue{
+func newAbstractQueue(size int) abstractQueue {
+	return abstractQueue{
 		maxSize: size,
 		front:   0,
 		nItems:  0,

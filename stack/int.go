@@ -6,11 +6,11 @@ import (
 )
 
 type intStack struct {
-	*abstractStack
+	abstractStack
 }
 
-func NewIntStack(size int) *intStack {
-	return &intStack{
+func NewIntStack(size int) intStack {
+	return intStack{
 		newAbstractStack(size),
 	}
 }

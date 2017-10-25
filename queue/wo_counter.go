@@ -12,8 +12,8 @@ type abstractQueueWoCounter struct {
 	data    []interface{}
 }
 
-func newAbstractQueueWoCounter(size int) *abstractQueueWoCounter {
-	return &abstractQueueWoCounter{
+func newAbstractQueueWoCounter(size int) abstractQueueWoCounter {
+	return abstractQueueWoCounter{
 		maxSize: size + 1,
 		front:   0,
 		rear:    0,
