@@ -12,7 +12,7 @@ type abstractQueueWoCounter struct {
 	data    []interface{}
 }
 
-func newAbstractQueueWoCounter(size int) abstractQueueWoCounter {
+func NewAbstractQueueWoCounter(size int) abstractQueueWoCounter {
 	return abstractQueueWoCounter{
 		maxSize: size + 1,
 		front:   0,
@@ -21,9 +21,9 @@ func newAbstractQueueWoCounter(size int) abstractQueueWoCounter {
 	}
 }
 
-func (q *abstractQueueWoCounter) insert(elem interface{}) error {
-	if q.isFull() {
-		return errors.New("queue is full")
+func (q *abstractQueueWoCounter) Insert(elem interface{}) error {
+	if q.IsFull() {
+		return errors.New("04_queue is full")
 	}
 	if q.rear == q.maxSize {
 		q.rear = 0
@@ -33,9 +33,9 @@ func (q *abstractQueueWoCounter) insert(elem interface{}) error {
 	return nil
 }
 
-func (q *abstractQueueWoCounter) remove() (interface{}, error) {
-	if q.isEmpty() {
-		return nil, errors.New("queue is empty")
+func (q *abstractQueueWoCounter) Remove() (interface{}, error) {
+	if q.IsEmpty() {
+		return nil, errors.New("04_queue is empty")
 	}
 	if q.front == q.maxSize {
 		q.front = 0
@@ -45,22 +45,22 @@ func (q *abstractQueueWoCounter) remove() (interface{}, error) {
 	return el, nil
 }
 
-func (q *abstractQueueWoCounter) peek() (interface{}, error) {
-	if q.isEmpty() {
-		return nil, errors.New("queue is empty")
+func (q *abstractQueueWoCounter) Peek() (interface{}, error) {
+	if q.IsEmpty() {
+		return nil, errors.New("04_queue is empty")
 	}
 	return q.data[q.front], nil
 }
 
-func (q *abstractQueueWoCounter) isFull() bool {
-	return q.size()+1 == q.maxSize
+func (q *abstractQueueWoCounter) IsFull() bool {
+	return q.Size()+1 == q.maxSize
 }
 
-func (q *abstractQueueWoCounter) isEmpty() bool {
-	return q.size() == 0
+func (q *abstractQueueWoCounter) IsEmpty() bool {
+	return q.Size() == 0
 }
 
-func (q *abstractQueueWoCounter) size() int {
+func (q *abstractQueueWoCounter) Size() int {
 	if q.rear >= q.front {
 		return q.rear - q.front
 	} else {
@@ -68,7 +68,7 @@ func (q *abstractQueueWoCounter) size() int {
 	}
 }
 
-func (q *abstractQueueWoCounter) display() string {
+func (q *abstractQueueWoCounter) Display() string {
 	var res string
 	if q.front <= q.rear {
 		for i := q.front; i < q.rear; i++ {

@@ -7,7 +7,7 @@ import (
 func TestPriorityQueue(t *testing.T) {
 	q := NewPriorityQueue(5)
 	if !q.isEmpty() {
-		t.Error("Expected isEmpty", true, "actual", false)
+		t.Error("Expected IsEmpty", true, "actual", false)
 	}
 	q.insert(5)
 	q.insert(2)
@@ -15,8 +15,8 @@ func TestPriorityQueue(t *testing.T) {
 	q.insert(4)
 	q.insert(7)
 	err := q.insert(9)
-	if err.Error() != "queue is full" {
-		t.Error("Expected err", "queue is full", "actual", err.Error())
+	if err.Error() != "04_queue is full" {
+		t.Error("Expected err", "04_queue is full", "actual", err.Error())
 	}
 
 	el, err := q.remove()
@@ -60,7 +60,7 @@ func TestPriorityQueue(t *testing.T) {
 	}
 
 	_, err = q.remove()
-	if err.Error() != "queue is empty" {
-		t.Error("Expected err", "queue is empty", "actual", err.Error())
+	if err.Error() != "04_queue is empty" {
+		t.Error("Expected err", "04_queue is empty", "actual", err.Error())
 	}
 }

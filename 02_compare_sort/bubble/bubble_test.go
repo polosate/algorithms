@@ -1,4 +1,4 @@
-package selecting
+package bubble
 
 import (
 	"reflect"
@@ -23,14 +23,14 @@ func Test(t *testing.T) {
 	expected := []int64{22, 77, 44, 33, 66, 55, 11, 111, 15, 34}
 	res := array.GetData()
 	if !reflect.DeepEqual(res, expected) {
-		t.Error("expected array", expected, "have array", res)
+		t.Error("expected 01_array", expected, "have 01_array", res)
 	}
 
-	array.SelectingSort()
+	array.BubbleSort()
 
 	expected = []int64{11, 15, 22, 33, 34, 44, 55, 66, 77, 111}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
-		t.Error("expected array", expected, "have array", res)
+		t.Error("expected 01_array", expected, "have 01_array", res)
 	}
 }

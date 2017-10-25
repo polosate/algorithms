@@ -12,7 +12,7 @@ type abstractQueue struct {
 	data    []interface{}
 }
 
-func newAbstractQueue(size int) abstractQueue {
+func NewAbstractQueue(size int) abstractQueue {
 	return abstractQueue{
 		maxSize: size,
 		front:   0,
@@ -22,9 +22,9 @@ func newAbstractQueue(size int) abstractQueue {
 	}
 }
 
-func (q *abstractQueue) insert(elem interface{}) error {
-	if q.isFull() {
-		return errors.New("queue is full")
+func (q *abstractQueue) Insert(elem interface{}) error {
+	if q.IsFull() {
+		return errors.New("04_queue is full")
 	}
 	if q.rear == q.maxSize {
 		q.rear = 0
@@ -35,9 +35,9 @@ func (q *abstractQueue) insert(elem interface{}) error {
 	return nil
 }
 
-func (q *abstractQueue) remove() (interface{}, error) {
-	if q.isEmpty() {
-		return nil, errors.New("queue is empty")
+func (q *abstractQueue) Remove() (interface{}, error) {
+	if q.IsEmpty() {
+		return nil, errors.New("04_queue is empty")
 	}
 	if q.front == q.maxSize {
 		q.front = 0
@@ -48,21 +48,21 @@ func (q *abstractQueue) remove() (interface{}, error) {
 	return el, nil
 }
 
-func (q *abstractQueue) peek() (interface{}, error) {
-	if q.isEmpty() {
-		return nil, errors.New("queue is empty")
+func (q *abstractQueue) Peek() (interface{}, error) {
+	if q.IsEmpty() {
+		return nil, errors.New("04_queue is empty")
 	}
 	return q.data[q.front], nil
 }
 
-func (q *abstractQueue) isFull() bool {
+func (q *abstractQueue) IsFull() bool {
 	return q.nItems == q.maxSize
 }
 
-func (q *abstractQueue) isEmpty() bool {
+func (q *abstractQueue) IsEmpty() bool {
 	return q.nItems == 0
 }
 
-func (q *abstractQueue) size() int {
+func (q *abstractQueue) Size() int {
 	return q.nItems
 }

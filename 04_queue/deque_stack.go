@@ -5,7 +5,6 @@ import "errors"
 type IStack interface {
 	Push(elem interface{}) error
 	Pop() (interface{}, error)
-	//Peek() (interface{}, error)
 	IsEmpty() bool
 	IsFull() bool
 }
@@ -23,7 +22,7 @@ func NewStack(size int) IStack {
 func (s *stack) Push(elem interface{}) error {
 	err := s.deque.insertRight(elem)
 	if err != nil {
-		return errors.New("stack is full")
+		return errors.New("03_stack is full")
 	}
 	return nil
 }
@@ -31,14 +30,10 @@ func (s *stack) Push(elem interface{}) error {
 func (s *stack) Pop() (interface{}, error) {
 	elem, err := s.deque.removeRight()
 	if err != nil {
-		return nil, errors.New("stack is empty")
+		return nil, errors.New("03_stack is empty")
 	}
 	return elem, nil
 }
-
-//func (s stack) Peek() (interface{}, error) {
-//
-//}
 
 func (s *stack) IsEmpty() bool {
 	return s.deque.isEmpty()

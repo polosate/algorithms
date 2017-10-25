@@ -23,16 +23,16 @@ func Test(t *testing.T) {
 	expected := []int64{10, 55, 7, 18, 89, 33, 66, 11, 84, 99}
 	res := array.GetData()
 	if !reflect.DeepEqual(res, expected) {
-		t.Error("expected array", expected, "have array", res)
+		t.Error("expected 01_array", expected, "have 01_array", res)
 	}
 	if array.GetLen() != 10 {
-		t.Error("expected len", 10, "have array", array.GetLen())
+		t.Error("expected len", 10, "have 01_array", array.GetLen())
 	}
 
-	// Insert to full array
+	// Insert to full 01_array
 	inserted := array.Insert(22)
 	if inserted {
-		t.Error("expected inserted", false, "have array", inserted)
+		t.Error("expected inserted", false, "have 01_array", inserted)
 	}
 
 	// Find element
@@ -55,10 +55,10 @@ func Test(t *testing.T) {
 	expected = []int64{10, 55, 7, 18, 33, 66, 11, 84, 99}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
-		t.Error("expected array", expected, "have array", res)
+		t.Error("expected 01_array", expected, "have 01_array", res)
 	}
 	if array.GetLen() != 9 {
-		t.Error("expected len", 9, "have array", array.GetLen())
+		t.Error("expected len", 9, "have 01_array", array.GetLen())
 	}
 
 	// Delete first element
@@ -69,10 +69,10 @@ func Test(t *testing.T) {
 	expected = []int64{55, 7, 18, 33, 66, 11, 84, 99}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
-		t.Error("expected array", expected, "have array", res)
+		t.Error("expected 01_array", expected, "have 01_array", res)
 	}
 	if array.GetLen() != 8 {
-		t.Error("expected len", 8, "have array", array.GetLen())
+		t.Error("expected len", 8, "have 01_array", array.GetLen())
 	}
 
 	// Delete last element
@@ -83,24 +83,24 @@ func Test(t *testing.T) {
 	expected = []int64{55, 7, 18, 33, 66, 11, 84}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
-		t.Error("expected array", expected, "have array", res)
+		t.Error("expected 01_array", expected, "have 01_array", res)
 	}
 	if array.GetLen() != 7 {
-		t.Error("expected len", 7, "have array", array.GetLen())
+		t.Error("expected len", 7, "have 01_array", array.GetLen())
 	}
 
 	// Insert element again
 	inserted = array.Insert(111)
 	if !inserted {
-		t.Error("expected inserted", true, "have array", inserted)
+		t.Error("expected inserted", true, "have 01_array", inserted)
 	}
 
 	expected = []int64{55, 7, 18, 33, 66, 11, 84, 111}
 	res = array.GetData()
 	if !reflect.DeepEqual(res, expected) {
-		t.Error("expected array", expected, "have array", res)
+		t.Error("expected 01_array", expected, "have 01_array", res)
 	}
 	if array.GetLen() != 8 {
-		t.Error("expected len", 8, "have array", array.GetLen())
+		t.Error("expected len", 8, "have 01_array", array.GetLen())
 	}
 }

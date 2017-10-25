@@ -20,7 +20,7 @@ func NewPriorityQueue(size int) priorityQueue {
 
 func (q *priorityQueue) insert(elem int64) error {
 	if q.isFull() {
-		return errors.New("queue is full")
+		return errors.New("04_queue is full")
 	}
 	if q.nItems == 0 {
 		q.data[q.nItems] = elem
@@ -42,7 +42,7 @@ func (q *priorityQueue) insert(elem int64) error {
 
 func (q *priorityQueue) remove() (int64, error) {
 	if q.isEmpty() {
-		return -1, errors.New("queue is empty")
+		return -1, errors.New("04_queue is empty")
 	}
 	el := q.data[q.nItems-1]
 	q.nItems--
@@ -51,7 +51,7 @@ func (q *priorityQueue) remove() (int64, error) {
 
 func (q *priorityQueue) peek() (int64, error) {
 	if q.isEmpty() {
-		return -1, errors.New("queue is empty")
+		return -1, errors.New("04_queue is empty")
 	}
 	return q.data[q.nItems-1], nil
 }
