@@ -68,8 +68,6 @@ func (q *abstractQueueWoCounter) size() int {
 	}
 }
 
-// 0 1 2 3 4 5
-// 7 8 0 4 5 6
 func (q *abstractQueueWoCounter) display() string {
 	var res string
 	if q.front <= q.rear {

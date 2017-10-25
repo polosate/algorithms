@@ -139,5 +139,4 @@ func TestDisplay(t *testing.T) {
 	if res != "" {
 		t.Error("Expected str", "", "actual", res)
 	}
-
 }
