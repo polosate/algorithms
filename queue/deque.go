@@ -11,8 +11,8 @@ type deque struct {
 	data    []interface{}
 }
 
-func newDeque(size int) *deque {
-	return &deque{
+func newDeque(size int) deque {
+	return deque{
 		maxSize: size + 1,
 		front:   0,
 		rear:    0,
