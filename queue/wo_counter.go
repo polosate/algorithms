@@ -2,6 +2,7 @@ package queue
 
 import (
 	"errors"
+	"fmt"
 )
 
 type abstractQueueWoCounter struct {
@@ -65,4 +66,23 @@ func (q *abstractQueueWoCounter) size() int {
 	} else {
 		return q.maxSize - q.front + q.rear
 	}
+}
+
+// 0 1 2 3 4 5
+// 7 8 0 4 5 6
+func (q *abstractQueueWoCounter) display() string {
+	var res string
+	if q.front <= q.rear {
+		for i := q.front; i < q.rear; i++ {
+			res += fmt.Sprint(q.data[i])
+		}
+	} else {
+		for i := q.front; i <= q.maxSize-1; i++ {
+			res += fmt.Sprint(q.data[i])
+		}
+		for i := 0; i < q.rear; i++ {
+			res += fmt.Sprint(q.data[i])
+		}
+	}
+	return res
 }

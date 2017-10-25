@@ -90,3 +90,54 @@ func TestAbstractWoCounter(t *testing.T) {
 		t.Error("Expected err", "queue is empty", "actual", err.Error())
 	}
 }
+
+func TestDisplay(t *testing.T) {
+	q := newAbstractQueueWoCounter(5)
+	res := q.display()
+	if res != "" {
+		t.Error("Expected str", "", "actual", res)
+	}
+
+	q.insert(1)
+	res = q.display()
+	if res != "1" {
+		t.Error("Expected str", "1", "actual", res)
+	}
+
+	q.insert(2)
+	q.insert(3)
+	q.insert(4)
+	q.insert(5)
+	res = q.display()
+	if res != "12345" {
+		t.Error("Expected str", "12345", "actual", res)
+	}
+
+	q.remove()
+	res = q.display()
+	if res != "2345" {
+		t.Error("Expected str", "2345", "actual", res)
+	}
+
+	q.insert(6)
+	res = q.display()
+	if res != "23456" {
+		t.Error("Expected str", "23456", "actual", res)
+	}
+
+	q.remove()
+	q.remove()
+	q.remove()
+	q.remove()
+	res = q.display()
+	if res != "6" {
+		t.Error("Expected str", "6", "actual", res)
+	}
+
+	q.remove()
+	res = q.display()
+	if res != "" {
+		t.Error("Expected str", "", "actual", res)
+	}
+
+}
