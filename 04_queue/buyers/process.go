@@ -1,7 +1,7 @@
 package buyers
 
 import (
-	"sync"
+	"time"
 )
 
 const (
@@ -9,28 +9,21 @@ const (
 	queueCount = 3
 )
 
-func Process() {
-	var wg sync.WaitGroup
+func Exec() {
 
 	shop := NewShop(queueCount)
 
 	for _, q := range shop.queues {
-		wg.Add(1)
 		go q.Process()
 	}
 
-	for i := 0; i < 100; i++ {
+	time.Sleep(time.Second * 1)
+
+	for i := 0; i < 10; i++ {
 		shop.Balancer(NewPerson(i, 10))
 	}
 
-
-	wg.Wait()
-}
-
-func initQueue(count int) []personQueue {
-	var queues []personQueue
-	for i := 0; i < count; i++ {
-		queues = append(queues, NewQueue(queueSize, i))
+	for !shop.IsEmpty() {
+		continue
 	}
-	return queues
 }
