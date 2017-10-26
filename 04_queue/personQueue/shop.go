@@ -1,4 +1,4 @@
-package buyers
+package personQueue
 
 import "fmt"
 
@@ -9,7 +9,7 @@ type Shop struct {
 func NewShop(queuesCount int) Shop {
 	queues := []personQueue{}
 	for i := 0; i < queuesCount; i++ {
-		queues = append(queues, NewQueue(queueSize, i))
+		queues = append(queues, NewQueue(10, i))
 	}
 	return Shop{
 		queues: queues,
@@ -17,13 +17,12 @@ func NewShop(queuesCount int) Shop {
 }
 
 func (s *Shop) IsEmpty() bool {
-	res := 0
 	for _, q := range s.queues {
-		if q.Size() == 0 {
-			res++
+		if !q.IsEmpty() {
+			return false
 		}
 	}
-	return res == len(s.queues)
+	return true
 }
 
 func (s *Shop) Balancer(person Person) {

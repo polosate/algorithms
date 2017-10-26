@@ -1,21 +1,19 @@
-package buyers
+package personQueue
 
 import (
 	"math/rand"
-	"time"
 )
 
 type Person struct {
 	num   int
-	delay time.Duration
+	delay int
 }
 
 func NewPerson(num int, delayRange int) Person {
-	d := time.Duration(time.Millisecond * time.Duration(rand.Intn(delayRange)))
-
+	d := rand.Intn(delayRange)
 	return Person{
 		num:   num,
-		delay: d / 1000000,
+		delay: d,
 	}
 }
 
@@ -23,6 +21,6 @@ func (p *Person) GetNum() int {
 	return p.num
 }
 
-func (p *Person) GetDelay() time.Duration {
+func (p *Person) GetDelay() int {
 	return p.delay
 }

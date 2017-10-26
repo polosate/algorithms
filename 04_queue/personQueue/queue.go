@@ -1,8 +1,6 @@
-package buyers
+package personQueue
 
 import (
- 	"time"
-
 	baseQ "data_structures_and_algorithms/04_queue"
 )
 
@@ -22,23 +20,26 @@ func (pq *personQueue) AddPerson(person Person) error {
 	return pq.baseQueue.Insert(person)
 }
 
-func (pq *personQueue) RemovePerson() {
+func (pq *personQueue) PeekPerson() (Person, error) {
 	element, err := pq.baseQueue.Peek()
 	if err != nil {
-		return
+		return Person{}, err
 	}
 	person, _ := element.(Person)
-	time.Sleep(person.GetDelay())
-	pq.baseQueue.Remove()
+	return person, nil
 }
 
-func (pq *personQueue) Process() {
-	for {
-		if pq.baseQueue.IsEmpty() {
-			continue
-		}
-		pq.RemovePerson()
+func (pq *personQueue) RemovePerson() (Person, error) {
+	element, err := pq.baseQueue.Remove()
+	if err != nil {
+		return Person{}, err
 	}
+	person, _ := element.(Person)
+	return person, nil
+}
+
+func (pq *personQueue) IsEmpty() bool {
+	return pq.baseQueue.IsEmpty()
 }
 
 func (pq *personQueue) Size() int {
