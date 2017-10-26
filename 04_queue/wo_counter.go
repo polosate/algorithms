@@ -5,6 +5,16 @@ import (
 	"fmt"
 )
 
+type IQueue interface {
+	Insert(elem interface{}) error
+	Remove() (interface{}, error)
+	Peek() (interface{}, error)
+	IsEmpty() bool
+	IsFull() bool
+	Size() int
+	Display() string
+}
+
 type abstractQueueWoCounter struct {
 	maxSize int
 	front   int
@@ -12,8 +22,8 @@ type abstractQueueWoCounter struct {
 	data    []interface{}
 }
 
-func NewAbstractQueueWoCounter(size int) abstractQueueWoCounter {
-	return abstractQueueWoCounter{
+func NewAbstractQueueWoCounter(size int) IQueue {
+	return &abstractQueueWoCounter{
 		maxSize: size + 1,
 		front:   0,
 		rear:    0,
