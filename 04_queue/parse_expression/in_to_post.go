@@ -1,7 +1,5 @@
 package parse_expression
 
-import "fmt"
-
 type inToPost struct {
 	stack  *operatorsStack
 	inStr  string
@@ -32,26 +30,18 @@ func (this *inToPost) DoTrans() {
 		default:
 			this.outStr += string(char)
 		}
-		fmt.Print("char ", string(char), "\n")
-		fmt.Print("stack ", this.stack.data, "\n")
-		fmt.Println("output ", this.outStr)
-		fmt.Println("----------------------------")
+	}
+	for !this.stack.isEmpty() {
+		this.outStr += this.stack.pop()
 	}
 }
 
 func (this *inToPost) gotOp(op string, priority1 int) {
-	if this.stack.isEmpty() {
-		this.stack.push(op)
-		return
-	}
-
 	for !this.stack.isEmpty() {
 		stOp := this.stack.pop()
 		if stOp == string('(') {
-			fmt.Println("!!!", op)
 			this.stack.push(stOp)
-			this.stack.push(op)
-			return
+			break
 		} else {
 			var priority2 int
 			switch stOp {
@@ -64,11 +54,11 @@ func (this *inToPost) gotOp(op string, priority1 int) {
 				this.stack.push(stOp)
 				break
 			} else {
-				this.stack.push(stOp)
+				this.outStr += stOp
 			}
 		}
 	}
-
+	this.stack.push(op)
 }
 
 func (this *inToPost) gotParen() {
