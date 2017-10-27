@@ -13,6 +13,7 @@ type IQueue interface {
 	IsFull() bool
 	Size() int
 	Display() string
+	Display1() []interface{}
 }
 
 type abstractQueueWoCounter struct {
@@ -59,6 +60,9 @@ func (q *abstractQueueWoCounter) Peek() (interface{}, error) {
 	if q.IsEmpty() {
 		return nil, errors.New("04_queue is empty")
 	}
+	if q.front == q.maxSize {
+		q.front = 0
+	}
 	return q.data[q.front], nil
 }
 
@@ -76,6 +80,23 @@ func (q *abstractQueueWoCounter) Size() int {
 	} else {
 		return q.maxSize - q.front + q.rear
 	}
+}
+
+func (q *abstractQueueWoCounter) Display1() []interface{} {
+	var res []interface{}
+	if q.front <= q.rear {
+		for i := q.front; i < q.rear; i++ {
+			res = append(res, q.data[i])
+		}
+	} else {
+		for i := q.front; i <= q.maxSize-1; i++ {
+			res = append(res, q.data[i])
+		}
+		for i := 0; i < q.rear; i++ {
+			res = append(res, q.data[i])
+		}
+	}
+	return res
 }
 
 func (q *abstractQueueWoCounter) Display() string {

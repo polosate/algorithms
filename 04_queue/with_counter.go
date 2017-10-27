@@ -52,6 +52,9 @@ func (q *abstractQueue) Peek() (interface{}, error) {
 	if q.IsEmpty() {
 		return nil, errors.New("04_queue is empty")
 	}
+	if q.front == q.maxSize {
+		q.front = 0
+	}
 	return q.data[q.front], nil
 }
 
