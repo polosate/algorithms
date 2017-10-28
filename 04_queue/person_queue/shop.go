@@ -1,4 +1,4 @@
-package personQueue
+package person_queue
 
 import "fmt"
 
@@ -22,7 +22,7 @@ func (s *Shop) tick() {
 		if p.DecrementDelay() == 0 {
 			s.queues[i].RemovePerson()
 		}
-		fmt.Println("queue#", s.queues[i].queueNum, s.queues[i].Nums())
+		fmt.Println("queue#", s.queues[i].queueNum, s.queues[i].PersonsNums())
 	}
 	fmt.Println("----------------------------------------")
 }

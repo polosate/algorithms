@@ -1,4 +1,4 @@
-package personQueue
+package person_queue
 
 import (
 	"math/rand"

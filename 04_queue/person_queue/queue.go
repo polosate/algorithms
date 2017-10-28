@@ -1,4 +1,4 @@
-package personQueue
+package person_queue
 
 import (
 	baseQ "data_structures_and_algorithms/04_queue"
@@ -46,7 +46,7 @@ func (pq *personQueue) Size() int {
 	return pq.baseQueue.Size()
 }
 
-func (pq *personQueue) Nums() []int {
+func (pq *personQueue) PersonsNums() []int {
 	var result []int
 	response := pq.baseQueue.Display1()
 	for _, v := range response {

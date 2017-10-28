@@ -5,46 +5,46 @@ import (
 	"fmt"
 )
 
-type IntStack struct {
+type DoubleStack struct {
 	abstractStack
 }
 
-func NewIntStack(size int) IntStack {
-	return IntStack{
+func NewDoubleStack(size int) DoubleStack {
+	return DoubleStack{
 		newAbstractStack(size),
 	}
 }
 
-func (s *IntStack) Push(el int64) error {
+func (s *DoubleStack) Push(el float64) error {
 	return s.abstractStack.push(el)
 }
 
-func (s *IntStack) Pop() (int64, error) {
+func (s *DoubleStack) Pop() (float64, error) {
 	el, err := s.Peek()
 	if err != nil {
 		return -1, err
 	} else {
 		s.top--
-		return int64(el), nil
+		return float64(el), nil
 	}
 }
 
-func (s *IntStack) Peek() (int64, error) {
+func (s *DoubleStack) Peek() (float64, error) {
 	el, err := s.abstractStack.peek()
 	if err != nil {
 		return -1, err
 	}
-	if intEl, ok := el.(int64); !ok {
+	if intEl, ok := el.(float64); !ok {
 		return -1, errors.New(fmt.Sprintf("received incompatibles type: value %v, type %T", el, el))
 	} else {
-		return int64(intEl), nil
+		return float64(intEl), nil
 	}
 }
 
-func (s *IntStack) IsEmpty() bool {
+func (s *DoubleStack) IsEmpty() bool {
 	return s.abstractStack.isEmpty()
 }
 
-func (s *IntStack) IsFull() bool {
+func (s *DoubleStack) IsFull() bool {
 	return s.abstractStack.isFull()
 }

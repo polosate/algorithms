@@ -1,14 +1,18 @@
 package parse_expression
 
+import (
+	s "data_structures_and_algorithms/03_stack"
+)
+
 type inToPost struct {
-	stack  *operatorsStack
+	stack  s.StrStack
 	inStr  string
 	outStr string
 }
 
 func NewInToPost(inStr string) *inToPost {
 	return &inToPost{
-		stack:  NewOperandsStack(len(inStr)),
+		stack:  s.NewStrStack(len(inStr)),
 		inStr:  inStr,
 		outStr: "",
 	}
@@ -24,23 +28,23 @@ func (this *inToPost) DoTrans() {
 		case string('*'), string('/'):
 			this.gotOp(string(char), 2)
 		case string('('):
-			this.stack.push(string(char))
+			this.stack.Push(string(char))
 		case string(')'):
 			this.gotParen()
 		default:
 			this.outStr += string(char)
 		}
 	}
-	for !this.stack.isEmpty() {
-		this.outStr += this.stack.pop()
+	for !this.stack.IsEmpty() {
+		this.outStr += this.stack.Pop()
 	}
 }
 
 func (this *inToPost) gotOp(op string, priority1 int) {
-	for !this.stack.isEmpty() {
-		stOp := this.stack.pop()
+	for !this.stack.IsEmpty() {
+		stOp := this.stack.Pop()
 		if stOp == string('(') {
-			this.stack.push(stOp)
+			this.stack.Push(stOp)
 			break
 		} else {
 			var priority2 int
@@ -51,19 +55,19 @@ func (this *inToPost) gotOp(op string, priority1 int) {
 				priority2 = 2
 			}
 			if priority2 < priority1 {
-				this.stack.push(stOp)
+				this.stack.Push(stOp)
 				break
 			} else {
 				this.outStr += stOp
 			}
 		}
 	}
-	this.stack.push(op)
+	this.stack.Push(op)
 }
 
 func (this *inToPost) gotParen() {
-	for !this.stack.isEmpty() {
-		el := this.stack.pop()
+	for !this.stack.IsEmpty() {
+		el := this.stack.Pop()
 		if el == string('(') {
 			break
 		} else {

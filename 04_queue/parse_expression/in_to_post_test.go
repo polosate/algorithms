@@ -16,9 +16,10 @@ func TestInToPost_Case01(t *testing.T) {
 	if outStr != expectedOut {
 		t.Error("Expected output", expectedOut, "have", outStr)
 	}
+	fmt.Printf("Output %s\n", outStr)
 }
 
-func TestInToPost_Case02(t *testing.T) {
+func TestInToPostCase02(t *testing.T) {
 	expr := NewInToPost("A*(B*C)")
 	expr.DoTrans()
 
@@ -29,17 +30,19 @@ func TestInToPost_Case02(t *testing.T) {
 	if outStr != expectedOut {
 		t.Error("Expected output", expectedOut, "have", outStr)
 	}
+	fmt.Printf("Output %s\n", outStr)
 }
 
-func TestInToPost_Case03(t *testing.T) {
+func TestInToPostCase03(t *testing.T) {
 	expr := NewInToPost("A+B/C-D*(E+F)")
 	expr.DoTrans()
 
 	outStr := expr.outStr
-	expectedOut := ""
+	expectedOut := "ABC/+DEF+*-"
 
 	fmt.Printf("Input %s\n", expr.inStr)
 	if outStr != expectedOut {
 		t.Error("Expected output", expectedOut, "have", outStr)
 	}
+	fmt.Printf("Output %s\n", outStr)
 }

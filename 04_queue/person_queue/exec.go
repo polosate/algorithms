@@ -1,4 +1,4 @@
-package personQueue
+package person_queue
 
 func Exec() {
 	shop := NewShop(3)
