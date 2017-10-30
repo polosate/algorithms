@@ -15,6 +15,6 @@ func NewLink(iData int, dData float32) *Link {
 	}
 }
 
-func (l Link) Display() {
+func (l Link) DisplayLink() {
 	fmt.Println(l.iData, l.dData)
 }

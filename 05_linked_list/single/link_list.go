@@ -19,3 +19,17 @@ func (ll *LinkList) InsertFirst(iData int, dData float32) {
 	l.next = ll.first
 	ll.first = l
 }
+
+func (ll *LinkList) DeleteFirst() *Link {
+	temp := ll.first
+	ll.first = ll.first.next
+	return temp
+}
+
+func (ll *LinkList) DisplayList() {
+	current := ll.first
+	for current != nil {
+		current.DisplayLink()
+		current = current.next
+	}
+}
