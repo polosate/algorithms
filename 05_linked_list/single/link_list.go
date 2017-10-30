@@ -44,7 +44,7 @@ func (ll *LinkList) DisplayList() {
 		current.DisplayLink()
 		current = current.next
 	}
-	fmt.Println("--------")
+	fmt.Println("\n--------")
 }
 
 func (ll *LinkList) Find(key int) *Link {

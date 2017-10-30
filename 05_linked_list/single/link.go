@@ -16,5 +16,5 @@ func NewLink(iData int, dData float32) *Link {
 }
 
 func (l Link) DisplayLink() {
-	fmt.Println(l.iData, l.dData)
+	fmt.Print(l.iData, l.dData, "; ")
 }
