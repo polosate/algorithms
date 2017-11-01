@@ -72,23 +72,54 @@ func (ll *doubleLinkedList) InsertAfter(key, dData float32) {
 	}
 	current.next = l
 	l.previous = current
-
 }
 
 func (ll *doubleLinkedList) DeleteFirst() *link {
 	if ll.IsEmpty() {
 		return nil
 	}
-
-	return nil
+	temp := ll.first
+	if temp.next == nil {
+		ll.first = nil
+		ll.last = nil
+	} else {
+		temp.next.previous = nil
+		ll.first = temp.next
+	}
+	return temp
 }
 
 func (ll *doubleLinkedList) DeleteLast() *link {
-	return nil
+	if ll.IsEmpty() {
+		return nil
+	}
+	temp := ll.last
+	if temp.previous == nil {
+		ll.first = nil
+		ll.last = nil
+	} else {
+		temp.previous.next = nil
+		ll.last = temp.previous
+	}
+	return temp
 }
 
 func (ll *doubleLinkedList) DeleteAfter(key float32) *link {
-	return nil
+	if ll.IsEmpty() {
+		return nil
+	}
+	current := ll.first
+	for current != nil && current.dData != key && current != ll.last {
+		current = current.next
+	}
+	if current == nil || current == ll.last {
+		return nil
+	} else {
+		t := current.next
+		current.next = t.next
+		current.next.previous = current
+		return t
+	}
 }
 
 func (ll *doubleLinkedList) DisplayForward() {
