@@ -10,6 +10,7 @@ type ISingleLinkList interface {
 	InsertAfter(key, iData int, dData float32)
 	InsertFirst(iData int, dData float32)
 	IsEmpty() bool
+	Reverse()
 }
 
 type LinkList struct {
@@ -39,6 +40,7 @@ func (ll *LinkList) DeleteFirst() *Link {
 }
 
 func (ll *LinkList) DisplayList() {
+	fmt.Println("List (first --> last)")
 	current := ll.first
 	for current != nil {
 		current.DisplayLink()
@@ -75,6 +77,30 @@ func (ll *LinkList) Delete(key int) *Link {
 		current = current.next
 	}
 	return nil
+}
+
+// first -> 1 -> 2 -> 3 -> nil
+func (ll *LinkList) Reverse() {
+	if ll.IsEmpty() || ll.first.next == nil {
+		return
+	}
+
+	var prevItem *Link
+	curItem := ll.first
+	nextItem := ll.first.next
+
+	for {
+		if nextItem == nil {
+			curItem.next = prevItem
+			ll.first.next = nil
+			ll.first = curItem
+			return
+		}
+		curItem.next = prevItem
+		prevItem = curItem
+		curItem = nextItem
+		nextItem = nextItem.next
+	}
 }
 
 func (ll *LinkList) InsertAfter(key, iData int, dData float32) {

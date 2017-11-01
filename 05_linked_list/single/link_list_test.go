@@ -1,6 +1,7 @@
 package single
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -95,4 +96,81 @@ func TestDelete(t *testing.T) {
 		t.Error("Expected next", 5.5, "have", el.dData)
 	}
 	ll.DisplayList()
+}
+
+func TestReverseEmptyList(t *testing.T) {
+	ll := NewLinkList()
+	if !ll.IsEmpty() {
+		t.Error("Expected IsEmpty", true, "have", false)
+	}
+	ll.Reverse()
+	if !ll.IsEmpty() {
+		t.Error("Expected IsEmpty", true, "have", false)
+	}
+
+}
+
+func TestReverseListWithOneItem(t *testing.T) {
+	ll := NewLinkList()
+	ll.InsertFirst(1, 1.1)
+	ll.DisplayList()
+	ll.Reverse()
+	fmt.Println("Reversed:")
+	ll.DisplayList()
+	el := ll.DeleteFirst()
+	if el.iData != 1 {
+		t.Error("Expected iData", 1, "have", el.iData)
+	}
+	if !ll.IsEmpty() {
+		t.Error("Expected IsEmpty", true, "have", false)
+	}
+}
+
+func TestReverseListWithTwoItems(t *testing.T) {
+	ll := NewLinkList()
+	ll.InsertFirst(1, 1.1)
+	ll.InsertFirst(2, 2.2)
+	ll.DisplayList()
+	ll.Reverse()
+	fmt.Println("Reversed:")
+	ll.DisplayList()
+	el := ll.DeleteFirst()
+	if el.iData != 1 {
+		t.Error("Expected iData", 1, "have", el.iData)
+	}
+}
+
+func TestReverse(t *testing.T) {
+	ll := NewLinkList()
+
+	ll.InsertFirst(1, 1.1)
+	ll.InsertFirst(2, 2.2)
+	ll.InsertFirst(3, 3.3)
+	ll.InsertFirst(4, 4.4)
+	ll.InsertFirst(5, 5.5)
+
+	el := ll.DeleteFirst()
+	if el.iData != 5 {
+		t.Error("Expected iData", 5, "have", el.iData)
+	}
+
+	ll.DisplayList()
+
+	ll.Reverse()
+	fmt.Println("Reversed:")
+	ll.DisplayList()
+
+	el = ll.DeleteFirst()
+	if el.iData != 1 {
+		t.Error("Expected iData", 1, "have", el.iData)
+	}
+	el = ll.DeleteFirst()
+	if el.iData != 2 {
+		t.Error("Expected iData", 2, "have", el.iData)
+	}
+	el = ll.DeleteFirst()
+	if el.iData != 3 {
+		t.Error("Expected iData", 3, "have", el.iData)
+	}
+
 }
