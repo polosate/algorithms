@@ -24,60 +24,60 @@ func NewIterator(list IList) IIterator {
 	return &iterator
 }
 
-func (this *iterator) Reset() {
-	this.current = this.list.GetFirst()
-	this.previous = nil
+func (i *iterator) Reset() {
+	i.current = i.list.GetFirst()
+	i.previous = nil
 }
 
-func (this *iterator) AtEnd() bool {
-	return this.current.next == nil
+func (i *iterator) AtEnd() bool {
+	return i.current.next == nil
 }
 
-func (this *iterator) NextLink() {
-	this.previous = this.current
-	this.current = this.current.next
+func (i *iterator) NextLink() {
+	i.previous = i.current
+	i.current = i.current.next
 }
 
-func (this *iterator) GetCurrent() *link {
-	return this.current
+func (i *iterator) GetCurrent() *link {
+	return i.current
 }
 
-func (this *iterator) InsertAfter(dData float32) {
+func (i *iterator) InsertAfter(dData float32) {
 	link := NewLink(dData)
-	if this.list.IsEmpty() {
-		this.list.SetFirst(link)
-		this.current = link
+	if i.list.IsEmpty() {
+		i.list.SetFirst(link)
+		i.current = link
 	} else {
-		link.next = this.current.next
-		this.current.next = link
-		this.NextLink()
+		link.next = i.current.next
+		i.current.next = link
+		i.NextLink()
 	}
 }
 
-func (this *iterator) InsertBefore(dData float32) {
+func (i *iterator) InsertBefore(dData float32) {
 	link := NewLink(dData)
-	if this.previous == nil {
-		link.next = this.list.GetFirst()
-		this.list.SetFirst(link)
-		this.Reset()
+	if i.previous == nil {
+		link.next = i.list.GetFirst()
+		i.list.SetFirst(link)
+		i.Reset()
 	} else {
-		this.previous.next = link
-		link.next = this.current
-		this.current = link
+		i.previous.next = link
+		link.next = i.current
+		i.current = link
 	}
 }
 
-func (this *iterator) DeleteCurrent() *link {
-	temp := this.current
-	if this.previous == nil {
-		this.list.SetFirst(this.current.next)
-		this.Reset()
+func (i *iterator) DeleteCurrent() *link {
+	temp := i.current
+	if i.previous == nil {
+		i.list.SetFirst(i.current.next)
+		i.Reset()
 	} else {
-		this.previous.next = this.current.next
-		if this.AtEnd() {
-			this.Reset()
+		i.previous.next = i.current.next
+		if i.AtEnd() {
+			i.Reset()
 		} else {
-			this.current = this.current.next
+			i.current = i.current.next
 		}
 	}
 	return temp
