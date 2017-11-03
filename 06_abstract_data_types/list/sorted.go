@@ -1,4 +1,4 @@
-package _6_abstract_data_types
+package list
 
 import "fmt"
 

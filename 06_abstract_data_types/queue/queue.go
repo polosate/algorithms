@@ -1,9 +1,11 @@
 package queue
 
 import (
-	adt "data_structures_and_algorithms/06_abstract_data_types"
+
 	"errors"
 	"fmt"
+
+	. "data_structures_and_algorithms/06_abstract_data_types/list"
 )
 
 type IQueue interface {
@@ -15,12 +17,12 @@ type IQueue interface {
 }
 
 type queue struct {
-	ll adt.ILinkList
+	ll ILinkList
 }
 
 func NewQueue() IQueue {
 	return &queue{
-		ll: adt.NewLinkList(),
+		ll: NewLinkList(),
 	}
 }
 

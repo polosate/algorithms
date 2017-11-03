@@ -1,8 +1,9 @@
 package priority_queue
 
 import (
-	. "data_structures_and_algorithms/06_abstract_data_types"
 	"errors"
+
+	. "data_structures_and_algorithms/06_abstract_data_types/list"
 )
 
 type IPriorityQueue interface {

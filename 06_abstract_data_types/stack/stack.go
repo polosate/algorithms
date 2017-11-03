@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	abt "data_structures_and_algorithms/06_abstract_data_types"
+	. "data_structures_and_algorithms/06_abstract_data_types/list"
 )
 
 type IStack interface {
@@ -16,12 +16,12 @@ type IStack interface {
 }
 
 type stack struct {
-	ll abt.ILinkList
+	ll ILinkList
 }
 
 func NewStack() IStack {
 	return &stack{
-		ll: abt.NewLinkList(),
+		ll: NewLinkList(),
 	}
 }
 
