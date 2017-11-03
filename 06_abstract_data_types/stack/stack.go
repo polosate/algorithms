@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	. "algorithms/06_abstract_data_types/list"
+	. "algorithms/06_abstract_data_types/base"
 )
 
 type IStack interface {
@@ -12,26 +12,40 @@ type IStack interface {
 	Pop() (float32, error)
 	Peek() (float32, error)
 	IsEmpty() bool
+	IsFull() bool
 	DisplayStack()
 }
 
 type stack struct {
-	ll ILinkList
+	ll      ILinkList
+	size    int
+	maxSize int
 }
 
-func NewStack() IStack {
+func NewStack(maxSize int) IStack {
 	return &stack{
-		ll: NewLinkList(),
+		ll:      NewLinkList(),
+		size:    0,
+		maxSize: maxSize,
 	}
 }
 
 func (s *stack) IsEmpty() bool {
 	return s.ll.IsEmpty()
+}
 
+func (s *stack) IsFull() bool {
+	return s.size == s.maxSize
 }
 
 func (s *stack) Push(dData float32) {
-	s.ll.InsertFirst(dData)
+	if s.IsFull() {
+		return
+	} else {
+		s.ll.InsertFirst(dData)
+		s.size++
+	}
+
 }
 
 func (s *stack) Pop() (float32, error) {
@@ -39,6 +53,7 @@ func (s *stack) Pop() (float32, error) {
 		return 0, errors.New("stack is empty")
 	}
 	el := s.ll.DeleteFirst()
+	s.size--
 	return el.GetData(), nil
 }
 

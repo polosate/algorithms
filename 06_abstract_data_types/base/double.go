@@ -1,4 +1,4 @@
-package list
+package base
 
 type IDoubleLinkedList interface {
 

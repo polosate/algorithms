@@ -5,7 +5,7 @@ import (
 )
 
 func TestLinkLIstQueue(t *testing.T) {
-	q := NewQueue()
+	q := NewQueue(5)
 	if !q.IsEmpty() {
 		t.Error("Expected IsEmpty", true, "actual", false)
 	}

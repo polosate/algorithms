@@ -44,7 +44,7 @@ func (sl *sortedList) Insert(iData int, dData float32) {
 
 func (sl *sortedList) Remove() (*Link, error) {
 	if sl.IsEmpty() {
-		return nil, errors.New("list is empty")
+		return nil, errors.New("base is empty")
 	}
 	temp := sl.first
 	sl.first = temp.next
@@ -57,5 +57,5 @@ func (sl *sortedList) DisplayList() {
 		current.DisplayLink()
 		current = current.next
 	}
-	fmt.Println("Sorted list (first --> last)")
+	fmt.Println("Sorted base (first --> last)")
 }

@@ -5,7 +5,7 @@ import (
 )
 
 func TestPriorityQueue(t *testing.T) {
-	q := NewPriorityQueue()
+	q := NewPriorityQueue(5)
 	if !q.IsEmpty() {
 		t.Error("Expected IsEmpty", true, "actual", false)
 	}

@@ -1,15 +1,15 @@
 package queue
 
 import (
-
 	"errors"
 	"fmt"
 
-	. "algorithms/06_abstract_data_types/list"
+	. "algorithms/06_abstract_data_types/base"
 )
 
 type IQueue interface {
 	IsEmpty() bool
+	IsFull() bool
 	Insert(dData float32)
 	Remove() (float32, error)
 	Peek() (float32, error)
@@ -17,12 +17,16 @@ type IQueue interface {
 }
 
 type queue struct {
-	ll ILinkList
+	ll      ILinkList
+	size    int
+	maxSize int
 }
 
-func NewQueue() IQueue {
+func NewQueue(maxSize int) IQueue {
 	return &queue{
-		ll: NewLinkList(),
+		ll:      NewLinkList(),
+		size:    0,
+		maxSize: maxSize,
 	}
 }
 
@@ -30,8 +34,17 @@ func (q *queue) IsEmpty() bool {
 	return q.ll.IsEmpty()
 }
 
+func (q *queue) IsFull() bool {
+	return q.size == q.maxSize
+}
+
 func (q *queue) Insert(dData float32) {
-	q.ll.InsertLast(dData)
+	if q.IsFull() {
+		return
+	} else {
+		q.ll.InsertLast(dData)
+		q.size++
+	}
 }
 
 func (q *queue) Remove() (float32, error) {
@@ -39,6 +52,7 @@ func (q *queue) Remove() (float32, error) {
 		return 0, errors.New("queue is empty")
 	}
 	el := q.ll.DeleteFirst()
+	q.size--
 	return el.GetData(), nil
 }
 

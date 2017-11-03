@@ -1,4 +1,4 @@
-package list
+package base
 
 import "fmt"
 
@@ -7,19 +7,16 @@ type ISortedList interface {
 	Insert(dData float32)
 	Remove() *Link
 	Peek() *Link
-	Size() int
 	DisplayList()
 }
 
 type sortedList struct {
 	first *Link
-	size  int
 }
 
 func NewSortedList() ISortedList {
 	return &sortedList{
 		first: nil,
-		size:  0,
 	}
 }
 
@@ -51,7 +48,6 @@ func (sl *sortedList) Insert(dData float32) {
 			previuos.next = newLink
 		}
 	}
-	sl.size++
 }
 
 func (sl *sortedList) Remove() *Link {
@@ -60,7 +56,6 @@ func (sl *sortedList) Remove() *Link {
 	}
 	temp := sl.first
 	sl.first = temp.next
-	sl.size--
 	return temp
 }
 
@@ -69,10 +64,6 @@ func (sl *sortedList) Peek() *Link {
 		return nil
 	}
 	return sl.first
-}
-
-func (sl *sortedList) Size() int {
-	return sl.size
 }
 
 func (sl *sortedList) DisplayList() {
