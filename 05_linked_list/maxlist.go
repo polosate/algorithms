@@ -7,6 +7,9 @@ import (
 
 // Lenovo ThinkPad X1 Carbon Gen 1 8GB
 // 236.087.000 (~4GB)
+
+// Lenovo ThinkPad T450 16GB
+// 621.780.000 (~12GB)
 func main() {
 	list := single.NewLinkList()
 	i := 0
