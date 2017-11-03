@@ -1,7 +1,7 @@
 package main
 
 import (
-	"data_structures_and_algorithms/05_linked_list/single"
+	"algorithms/05_linked_list/single"
 	"fmt"
 )
 

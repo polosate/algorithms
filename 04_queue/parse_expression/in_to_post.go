@@ -1,7 +1,7 @@
 package parse_expression
 
 import (
-	s "data_structures_and_algorithms/03_stack"
+	s "algorithms/03_stack"
 )
 
 type inToPost struct {

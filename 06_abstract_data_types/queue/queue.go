@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	. "data_structures_and_algorithms/06_abstract_data_types/list"
+	. "algorithms/06_abstract_data_types/list"
 )
 
 type IQueue interface {

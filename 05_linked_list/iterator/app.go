@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	. "data_structures_and_algorithms/05_linked_list/iterator/iterator"
+	. "algorithms/05_linked_list/iterator/iterator"
 )
 
 func main() {

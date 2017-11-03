@@ -1,7 +1,7 @@
 package person_queue
 
 import (
-	baseQ "data_structures_and_algorithms/04_queue"
+	baseQ "algorithms/04_queue"
 )
 
 type personQueue struct {
