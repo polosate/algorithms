@@ -2,8 +2,8 @@ package stack
 
 import "testing"
 
-func TestIntStack(t *testing.T) {
-	stack := NewStack(5)
+func TestRingStack(t *testing.T) {
+	stack := NewRingStack(5)
 	if !stack.IsEmpty() {
 		t.Error("expected IsEmpty", true, "have", false)
 	}

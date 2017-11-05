@@ -2,12 +2,22 @@ package ring
 
 import "fmt"
 
+type IRing interface {
+	Insert(value float32)
+	Remove() *link
+	Peek() *link
+	Step(step int)
+	IsEmpty() bool
+	DisplayRing()
+	GetCurrent() *link
+}
+
 type ring struct {
 	current *link
 }
 
-func NewRing() ring {
-	return ring{
+func NewRing() IRing {
+	return &ring{
 		current: nil,
 	}
 }
@@ -20,7 +30,6 @@ func (r *ring) Insert(value float32) {
 	} else {
 		link.next = r.current.next
 		r.current.next = link
-		r.current = link
 	}
 }
 
@@ -35,6 +44,14 @@ func (r *ring) Remove() *link {
 		temp := r.current.next
 		r.current.next = temp.next
 		return temp
+	}
+}
+
+func (r *ring) Peek() *link {
+	if r.IsEmpty() {
+		return nil
+	} else {
+		return r.current.next
 	}
 }
 
@@ -54,13 +71,17 @@ func (r *ring) DisplayRing() {
 	} else if r.current == r.current.next {
 		r.current.DisplayLink()
 	} else {
-		current := r.current
+		current := r.current.next
 		current.DisplayLink()
 		current = current.next
-		for current != r.current {
+		for current != r.current.next {
 			current.DisplayLink()
 			current = current.next
 		}
 	}
 	fmt.Println("\n--------")
+}
+
+func (r *ring) GetCurrent() *link {
+	return r.current
 }

@@ -9,7 +9,11 @@ func TestRingInsert(t *testing.T) {
 	ring.Insert(3)
 	ring.Insert(4)
 	ring.Insert(5)
-	ring.DisplayRing()
+	//ring.DisplayRing()
+	el := ring.Peek()
+	if el.GetValue() != 5 {
+		t.Error("Expected el", 5, "have", el.GetValue())
+	}
 }
 
 func TestRingStep(t *testing.T) {
@@ -21,15 +25,15 @@ func TestRingStep(t *testing.T) {
 	ring.Insert(5)
 	ring.Insert(6)
 
-	if ring.current.GetValue() != 6 {
-		t.Error("Expected current", 6, "have", ring.current.GetValue())
+	if ring.GetCurrent().GetValue() != 1 {
+		t.Error("Expected current", 1, "have", ring.GetCurrent().GetValue())
 	}
 
 	ring.Step(3)
-	if ring.current.GetValue() != 3 {
-		t.Error("Expected current", 3, "have", ring.current.GetValue())
+	if ring.GetCurrent().GetValue() != 4 {
+		t.Error("Expected current", 4, "have", ring.GetCurrent().GetValue())
 	}
-	ring.DisplayRing()
+	//ring.DisplayRing()
 }
 
 func TestRingRemove(t *testing.T) {
@@ -43,8 +47,8 @@ func TestRingRemove(t *testing.T) {
 	if el.GetValue() != 1 {
 		t.Error("Expected el", 1, "have", el.GetValue())
 	}
-	if ring.current != nil {
-		t.Error("Expected current", nil, "have", ring.current)
+	if ring.GetCurrent() != nil {
+		t.Error("Expected current", nil, "have", ring.GetCurrent())
 	}
 
 	ring.Insert(2)
@@ -53,12 +57,12 @@ func TestRingRemove(t *testing.T) {
 	ring.Insert(5)
 
 	el = ring.Remove()
-	if el.GetValue() != 2 {
-		t.Error("Expected el", 2, "have", el.GetValue())
+	if el.GetValue() != 5 {
+		t.Error("Expected el", 5, "have", el.GetValue())
 	}
-	if ring.current.next.GetValue() != 3 {
-		t.Error("Expected current", 3, "have", ring.current.next.GetValue())
+	if ring.GetCurrent().GetNext().GetValue() != 4 {
+		t.Error("Expected current", 4, "have", ring.GetCurrent().GetNext().GetValue())
 	}
-	ring.DisplayRing()
+	//ring.DisplayRing()
 
 }

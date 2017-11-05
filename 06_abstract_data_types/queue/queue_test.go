@@ -25,6 +25,6 @@ func TestLinkLIstQueue(t *testing.T) {
 		t.Error("Expected el", 1.1, "actual", el)
 	}
 
-	q.DisplayQueue()
+	//q.DisplayQueue()
 
 }
