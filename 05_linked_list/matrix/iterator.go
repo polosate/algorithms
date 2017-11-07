@@ -8,11 +8,11 @@ type iterator struct {
 }
 
 func NewIterator(l *list) iterator {
-	return iterator{
+	iterator := iterator{
 		myList:   l,
-		current:  nil,
-		previous: nil,
 	}
+	iterator.Reset()
+	return iterator
 }
 
 func (i *iterator) Reset() {
