@@ -3,15 +3,15 @@ package iterator
 import "fmt"
 
 type IList interface {
-	GetFirst() *link
-	SetFirst(*link)
+	GetFirst() *Link
+	SetFirst(*Link)
 	IsEmpty() bool
 	GetIterator() IIterator
 	DisplayList()
 }
 
 type linkList struct {
-	first *link
+	first *Link
 }
 
 func NewLinkList() IList {
@@ -20,11 +20,11 @@ func NewLinkList() IList {
 	}
 }
 
-func (ll *linkList) GetFirst() *link {
+func (ll *linkList) GetFirst() *Link {
 	return ll.first
 }
 
-func (ll *linkList) SetFirst(l *link) {
+func (ll *linkList) SetFirst(l *Link) {
 	ll.first = l
 }
 

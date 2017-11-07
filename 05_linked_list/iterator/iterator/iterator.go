@@ -4,16 +4,16 @@ type IIterator interface {
 	Reset()
 	AtEnd() bool
 	NextLink()
-	GetCurrent() *link
+	GetCurrent() *Link
 	InsertAfter(dData float32)
 	InsertBefore(dData float32)
-	DeleteCurrent() *link
+	DeleteCurrent() *Link
 }
 
 type iterator struct {
 	list     IList
-	current  *link
-	previous *link
+	current  *Link
+	previous *Link
 }
 
 func NewIterator(list IList) IIterator {
@@ -38,7 +38,7 @@ func (i *iterator) NextLink() {
 	i.current = i.current.next
 }
 
-func (i *iterator) GetCurrent() *link {
+func (i *iterator) GetCurrent() *Link {
 	return i.current
 }
 
@@ -67,7 +67,7 @@ func (i *iterator) InsertBefore(dData float32) {
 	}
 }
 
-func (i *iterator) DeleteCurrent() *link {
+func (i *iterator) DeleteCurrent() *Link {
 	temp := i.current
 	if i.previous == nil {
 		i.list.SetFirst(i.current.next)

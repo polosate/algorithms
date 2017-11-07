@@ -2,21 +2,21 @@ package iterator
 
 import "fmt"
 
-type link struct {
+type Link struct {
 	dData float32
-	next  *link
+	next  *Link
 }
 
-func NewLink(dData float32) *link {
-	return &link{
+func NewLink(dData float32) *Link {
+	return &Link{
 		dData: dData,
 	}
 }
 
-func (l *link) DisplayLink() {
+func (l *Link) DisplayLink() {
 	fmt.Print(l.dData, "; ")
 }
 
-func (l *link) GetData() float32 {
+func (l *Link) GetData() float32 {
 	return l.dData
 }
