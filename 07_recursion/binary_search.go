@@ -13,10 +13,10 @@ func NewArray(arr []int) array {
 }
 
 func (a *array) Find(key int) int {
-	return a.binarySearch(0, a.size-1, key)
+	return a.recSearch(0, a.size-1, key)
 }
 
-func (a *array) binarySearch(lowerBound, upperBound int, searchKey int) int {
+func (a *array) recSearch(lowerBound, upperBound int, searchKey int) int {
 	idx := (lowerBound + upperBound) / 2
 	if lowerBound > upperBound {
 		return a.size
@@ -26,8 +26,8 @@ func (a *array) binarySearch(lowerBound, upperBound int, searchKey int) int {
 	}
 
 	if a.intArr[idx] > searchKey {
-		return a.binarySearch(lowerBound, idx-1, searchKey)
+		return a.recSearch(lowerBound, idx-1, searchKey)
 	} else {
-		return a.binarySearch(idx+1, upperBound, searchKey)
+		return a.recSearch(idx+1, upperBound, searchKey)
 	}
 }
