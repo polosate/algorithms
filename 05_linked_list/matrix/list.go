@@ -1,5 +1,7 @@
 package matrix
 
+import "fmt"
+
 type list struct {
 	first    *link
 	nextList *list
@@ -34,4 +36,13 @@ func (l *list) GetIterator() iterator {
 
 func (l *list) IsEmpty() bool {
 	return l.first == nil
+}
+
+func (l *list) DisplayList() {
+	current := l.first
+	for current != nil {
+		current.DisplayLink()
+		current = current.next
+	}
+	fmt.Println()
 }
