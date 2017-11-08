@@ -43,3 +43,13 @@ func TestBinarySearchEven(t *testing.T) {
 		t.Error("Wand index", 4, "have", index)
 	}
 }
+
+func TestBinarySearchEmpty(t *testing.T) {
+	array := NewArray([]int{})
+
+	index := array.Find(0)
+	if index != 0 {
+		t.Error("Wand index", 0, "have", index)
+	}
+
+}
