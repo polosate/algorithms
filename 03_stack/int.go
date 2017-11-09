@@ -48,3 +48,11 @@ func (s *IntStack) IsEmpty() bool {
 func (s *IntStack) IsFull() bool {
 	return s.abstractStack.isFull()
 }
+
+func (s *IntStack) DisplayStack() {
+
+	for i := 0; i <= s.top; i++ {
+		fmt.Print(s.abstractStack.data[i], "; ")
+	}
+	fmt.Println()
+}
