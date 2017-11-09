@@ -4,7 +4,7 @@ func recMergeSort(array []int) {
 	if len(array) == 1 {
 
 	} else {
-		rec
+		//rec
 	}
 }
 
