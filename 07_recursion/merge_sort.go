@@ -1,11 +1,66 @@
 package _7_recursion
 
-func recMergeSort(array []int) {
-	if len(array) == 1 {
+import "fmt"
 
-	} else {
-		//rec
+type MArray struct {
+	array []int
+	size  int
+}
+
+func NewMArray(array []int) MArray {
+	return MArray{
+		array: array,
+		size:  len(array),
 	}
+}
+
+func (ma *MArray) MergeSort() {
+	workArea := make([]int, ma.size)
+	ma.recMergeSort(workArea, 0, ma.size-1)
+}
+
+func (ma *MArray) recMergeSort(workArea []int, lowerBound, upperBound int) {
+	if lowerBound == upperBound {
+		return
+	} else {
+		mid := (lowerBound + upperBound) / 2
+		ma.recMergeSort(workArea, lowerBound, mid)
+		ma.recMergeSort(workArea, mid+1, upperBound)
+		ma.merge(workArea, lowerBound, mid, upperBound)
+	}
+}
+
+func (ma *MArray) merge(workArea []int, lowerBound, mid, upperBound int) {
+	j := 0
+	aInd := lowerBound
+	bInd := mid + 1
+	for aInd <= mid && bInd <= upperBound {
+		if ma.array[aInd] < ma.array[bInd] {
+			workArea[j] = ma.array[aInd]
+			aInd++
+		} else {
+			workArea[j] = ma.array[bInd]
+			bInd++
+		}
+		j++
+	}
+	for aInd <= mid {
+		workArea[j] = ma.array[aInd]
+		aInd++
+		j++
+	}
+	for bInd <= upperBound {
+		workArea[j] = ma.array[bInd]
+		bInd++
+		j++
+	}
+	for j = 0; j <= upperBound-lowerBound; j++ {
+		ma.array[lowerBound+j] = workArea[j]
+	}
+}
+
+func (ma *MArray) Display() {
+	fmt.Println(ma.array)
 }
 
 func mergeSort(arrayA, arrayB []int) []int {
