@@ -1,5 +1,7 @@
 package _7_recursion
 
+//import "fmt"
+
 type rucksack struct {
 	size  int
 	sum   int
@@ -23,25 +25,25 @@ func (r *rucksack) do(sum int, array []int, res []int) []int {
 	if sum-array[0] == 0 {
 		res = append(res, array[0])
 		return res
-	} else {
-		if sum-array[0] > 0 {
-			sum = sum - array[0]
-			res = append(res, array[0])
+	}
+	if sum-array[0] > 0 {
+		sum = sum - array[0]
+		res = append(res, array[0])
+		if len(array) > 1 {
 			array = array[1:]
 			return r.do(sum, array, res)
 		} else {
-			if len(array) > 1 {
-				return r.do(sum, array[1:], res)
-			} else {
-				if len(r.array) > 1 {
-					r.array = r.array[1:]
-					newRes := make([]int, 0, r.size)
-					newArray := r.array
-					return r.do(r.sum, newArray, newRes)
-				} else {
-					return []int{0, 0, 0}
-				}
-			}
+			return []int{0}
 		}
 	}
+	if len(array) > 1 {
+		return r.do(sum, array[1:], res)
+	}
+	if len(r.array) > 1 {
+		r.array = r.array[1:]
+		newRes := make([]int, 0, r.size)
+		newArray := r.array
+		return r.do(r.sum, newArray, newRes)
+	}
+	return []int{0}
 }
