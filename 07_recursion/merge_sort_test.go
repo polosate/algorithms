@@ -6,9 +6,9 @@ import (
 )
 
 func TestRecMergeSort(t *testing.T) {
-	a := NewMArray([]int{3, 1, 2, 0})
+	a := NewMArray([]int{3, 1, 2, 0, 5, 6})
 	a.MergeSort()
-	expected := []int{0, 1, 2, 3}
+	expected := []int{0, 1, 2, 3, 5, 6}
 	if !reflect.DeepEqual(a.array, expected) {
 		t.Error("Want", expected, "have", a.array)
 	}
