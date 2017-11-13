@@ -1,45 +1,15 @@
 package _7_recursion
 
-type group struct {
-	members  []string
-	teamSize int
-
-	result [][]string
-}
-
-func NewGroup(members []string, size int) group {
-	return group{
-		members:  members,
-		teamSize: size,
+func makeTeams(prefix string, group string, size int) []string {
+	groupB := []byte(group)
+	if size == 0 {
+		return []string{prefix}
 	}
-}
-
-func (g *group) left(group, team, ind int) {
-	if group == 0 || team == 0 || group < team {
-		return
+	if len(groupB) == 0 {
+		return []string{}
 	}
-	if group == 1 && team == 1 {
-		for i := range g.result {
-			g.result[i] = append(g.result[i], g.members[ind])
-		}
-	} else {
-		g.left(group-1, team-1, ind+1)
-		g.right(group-1, team, ind+1, g.result)
-	}
-}
-
-func (g *group) right(group, team, ind int, result [][]string) {
-	if group == 0 || team == 0 || group < team {
-		return
-	}
-	if group == 1 && team == 1 {
-		result = append(result, []string{g.members[ind]})
-
-	} else {
-
-	}
-}
-
-func (g *group) makeTeams() {
-
+	result := []string{}
+	result = append(result, makeTeams(prefix+string(groupB[0]), string(groupB[1:]), size - 1)...)
+	result = append(result, makeTeams(prefix, string(groupB[1:]), size)...)
+	return result
 }

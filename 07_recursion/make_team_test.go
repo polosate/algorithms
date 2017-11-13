@@ -1,11 +1,14 @@
 package _7_recursion
 
 import (
-	"fmt"
+	"reflect"
 	"testing"
 )
 
 func TestGroup_SetTeamSize(t *testing.T) {
-	group := NewGroup([]string{"A", "B", "C", "D", "E"}, 3)
-
+	expected := []string{"ABC", "ABD", "ABE", "ACD", "ACE", "ADE", "BCD", "BCE", "BDE", "CDE"}
+	res := makeTeams("", "ABCDE", 3)
+	if !reflect.DeepEqual(res, expected) {
+		t.Error("Want", expected, "have", res)
+	}
 }
