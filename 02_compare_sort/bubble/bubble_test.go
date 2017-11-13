@@ -6,7 +6,7 @@ import (
 )
 
 func Test(t *testing.T) {
-	array := newArray(10)
+	array := NewArray(10)
 
 	// Insert elements
 	array.Insert(22)

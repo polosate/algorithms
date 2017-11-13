@@ -1,15 +1,23 @@
 package inserting
 
-type array struct {
+type IArray struct {
 	data []int64
 	len  int
 }
 
-func newArray(size int) array {
-	return array{make([]int64, size), 0}
+// For benchmark
+func NewIArray(array []int64) IArray {
+	return IArray{
+		data: array,
+		len:  len(array),
+	}
 }
 
-func (this *array) Insert(elem int64) bool {
+func NewArray(size int) IArray {
+	return IArray{make([]int64, size), 0}
+}
+
+func (this *IArray) Insert(elem int64) bool {
 	if this.len >= cap(this.data) {
 		return false
 	}
@@ -18,7 +26,7 @@ func (this *array) Insert(elem int64) bool {
 	return true
 }
 
-func (this *array) Median() float64 {
+func (this *IArray) Median() float64 {
 	this.InsertingSort()
 	if this.len%2 == 0 {
 		return float64(this.data[this.len/2]+this.data[this.len/2-1]) / 2
@@ -27,7 +35,7 @@ func (this *array) Median() float64 {
 	}
 }
 
-func (this *array) NoDups() {
+func (this *IArray) NoDups() {
 	this.InsertingSort()
 	insertInd := 0
 	for i := 0; i < this.len-1; i++ {
@@ -39,7 +47,7 @@ func (this *array) NoDups() {
 	this.len = insertInd + 1
 }
 
-func (this *array) InsertingSortWithBinarySearch() {
+func (this *IArray) InsertingSortWithBinarySearch() {
 	var temp int64
 
 	for i := 1; i < this.len; i++ {
@@ -52,7 +60,7 @@ func (this *array) InsertingSortWithBinarySearch() {
 	}
 }
 
-func (this *array) InsertingSort() {
+func (this *IArray) InsertingSort() {
 	var tempIn int
 	var temp int64
 	for i := 1; i < this.len; i++ {
@@ -69,11 +77,11 @@ func (this *array) InsertingSort() {
 	}
 }
 
-func (this *array) GetData() []int64 {
+func (this *IArray) GetData() []int64 {
 	return this.data[:this.len]
 }
 
-func (this *array) GetLen() int {
+func (this *IArray) GetLen() int {
 	return this.len
 }
 

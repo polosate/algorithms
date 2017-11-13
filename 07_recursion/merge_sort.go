@@ -3,11 +3,11 @@ package _7_recursion
 import "fmt"
 
 type MArray struct {
-	array []int
+	array []int64
 	size  int
 }
 
-func NewMArray(array []int) MArray {
+func NewMArray(array []int64) MArray {
 	return MArray{
 		array: array,
 		size:  len(array),
@@ -15,11 +15,11 @@ func NewMArray(array []int) MArray {
 }
 
 func (ma *MArray) MergeSort() {
-	workArea := make([]int, ma.size)
+	workArea := make([]int64, ma.size)
 	ma.recMergeSort(workArea, 0, ma.size-1)
 }
 
-func (ma *MArray) recMergeSort(workArea []int, lowerBound, upperBound int) {
+func (ma *MArray) recMergeSort(workArea []int64, lowerBound, upperBound int) {
 	if lowerBound == upperBound {
 		return
 	} else {
@@ -30,7 +30,7 @@ func (ma *MArray) recMergeSort(workArea []int, lowerBound, upperBound int) {
 	}
 }
 
-func (ma *MArray) merge(workArea []int, lowerBound, mid, upperBound int) {
+func (ma *MArray) merge(workArea []int64, lowerBound, mid, upperBound int) {
 	j := 0
 	aInd := lowerBound
 	bInd := mid + 1

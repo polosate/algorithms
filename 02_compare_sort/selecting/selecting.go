@@ -1,15 +1,23 @@
 package selecting
 
-type array struct {
+type SArray struct {
 	data []int64
 	len  int
 }
 
-func newArray(size int) array {
-	return array{make([]int64, size), 0}
+// For benchmark
+func NewSArray(array []int64) SArray {
+	return SArray{
+		data: array,
+		len:  len(array),
+	}
 }
 
-func (this *array) Insert(elem int64) bool {
+func NewArray(size int) SArray {
+	return SArray{make([]int64, size), 0}
+}
+
+func (this *SArray) Insert(elem int64) bool {
 	if this.len >= cap(this.data) {
 		return false
 	}
@@ -18,7 +26,7 @@ func (this *array) Insert(elem int64) bool {
 	return true
 }
 
-func (this *array) SelectingSort() {
+func (this *SArray) SelectingSort() {
 	var temp int64
 	var minInd int
 	for i := 0; i < this.len-1; i++ {
@@ -34,10 +42,10 @@ func (this *array) SelectingSort() {
 	}
 }
 
-func (this *array) GetData() []int64 {
+func (this *SArray) GetData() []int64 {
 	return this.data[:this.len]
 }
 
-func (this *array) GetLen() int {
+func (this *SArray) GetLen() int {
 	return this.len
 }

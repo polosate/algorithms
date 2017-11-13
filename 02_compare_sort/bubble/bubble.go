@@ -1,15 +1,23 @@
 package bubble
 
-type array struct {
+type BArray struct {
 	data []int64
 	len  int
 }
 
-func newArray(size int) array {
-	return array{make([]int64, size), 0}
+// For benchmark
+func NewBArray(array []int64) BArray {
+	return BArray{
+		data: array,
+		len:  len(array),
+	}
 }
 
-func (this *array) Insert(elem int64) bool {
+func NewArray(size int) BArray {
+	return BArray{make([]int64, size), 0}
+}
+
+func (this *BArray) Insert(elem int64) bool {
 	if this.len >= cap(this.data) {
 		return false
 	}
@@ -18,7 +26,7 @@ func (this *array) Insert(elem int64) bool {
 	return true
 }
 
-func (this *array) BubbleSort() {
+func (this *BArray) BubbleSort() {
 	var temp int64
 	for i := 0; i < this.len-1; i++ {
 		for j := 0; j < this.len-i-1; j++ {
@@ -31,10 +39,10 @@ func (this *array) BubbleSort() {
 	}
 }
 
-func (this *array) GetData() []int64 {
+func (this *BArray) GetData() []int64 {
 	return this.data[:this.len]
 }
 
-func (this *array) GetLen() int {
+func (this *BArray) GetLen() int {
 	return this.len
 }
