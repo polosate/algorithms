@@ -13,16 +13,27 @@ func NewPartArray(array []int64) PartArray {
 }
 
 func (a *PartArray) Partition(left, right int, pivot int64) int {
-	leftPtr := left
-	rightPtr := right
+	leftPtr := left - 1
+	rightPtr := right + 1
+	var i int
 
 	for {
-		for leftPtr < right && a.array[leftPtr] < pivot {
+		for i = leftPtr; i < right; i++ {
 			leftPtr++
+			if i < right && a.array[leftPtr] < pivot {
+				continue
+			} else {
+				break
+			}
 		}
 
-		for rightPtr > left && a.array[rightPtr] > pivot {
+		for i = rightPtr; i > left; i-- {
 			rightPtr--
+			if i > left && a.array[rightPtr] >= pivot {
+				continue
+			} else {
+				break
+			}
 		}
 
 		if leftPtr >= rightPtr {
@@ -33,7 +44,7 @@ func (a *PartArray) Partition(left, right int, pivot int64) int {
 			a.array[rightPtr] = temp
 		}
 	}
-	return leftPtr	
+	return leftPtr
 }
 
 func (a *PartArray) Display() {

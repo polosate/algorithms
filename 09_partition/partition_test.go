@@ -5,18 +5,19 @@ import (
 )
 
 func TestPartition(t *testing.T) {
-	data := []int64{5, 2, 15, 20, 9, 10, 3, 6, 4, 0}
+	data := []int64{5, 2, 15, 20, 9, 10, 3, 6, 40, 30}
+	var pivot int64 = 7
 	a := NewPartArray(data)
-	pivotInd := a.Partition(0, len(data)-1, 6)
-	if pivotInd != 5 {
-		t.Error("Want partition index", 5, "have", pivotInd)
+	pivotInd := a.Partition(0, len(data)-1, pivot)
+	if pivotInd != 4 {
+		t.Error("Want partition index", 4, "have", pivotInd)
 	}
 	for i, v := range a.array {
-		if i <= 5 && v > 6 {
-			t.Fail()
+		if i < pivotInd && v > pivot {
+			t.Error("want element less then", pivot, "got", v)
 		}
-		if i > 5 && v <= 6 {
-			t.Fail()
+		if i >= pivotInd && v < pivot {
+			t.Error("want element more then", pivot, "got", v)
 		}
 	}
 }
