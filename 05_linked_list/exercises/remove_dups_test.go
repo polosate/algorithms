@@ -17,7 +17,15 @@ func TestRemoveDups(t *testing.T) {
 	list.InsertFirst(2)
 	list.InsertFirst(2)
 
-	list.DisplayList()
+	result := []int64{2, 6, 1, 5, 3}
+
 	RemoveDups(list)
-	list.DisplayList()
+
+	current := list.first
+	for _, v := range result {
+		if current.value != v {
+			t.Error("Want", v, "got", current.value)
+		}
+		current = current.next
+	}
 }

@@ -1,5 +1,7 @@
 package exercises
 
+import "fmt"
+
 type singleList struct {
 	first *link
 }
@@ -20,6 +22,7 @@ func (sl *singleList) DisplayList() {
 		current.DisplayLink()
 		current = current.next
 	}
+	fmt.Println()
 }
 
 func (sl *singleList) InsertFirst(value int64) {
