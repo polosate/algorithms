@@ -1,29 +1,38 @@
 package _7_recursion
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-func PaintTree(size int) {
-	paint(0, size)
+func PaintTree(deep float64) {
+	res := make([][]string, int(deep)+1)
+	makeTree(0, int(math.Pow(2, deep))-1, 0, res)
+	display(res)
 }
 
-func paint(left, right int) {
+func makeTree(left, right, deep int, res [][]string) {
 	if left == right {
+		res[deep] = append(res[deep], "X")
 		return
 	}
-
 	mid := (left + right) / 2
-
 	for i := left; i <= mid; i++ {
-		fmt.Print("-")
+		res[deep] = append(res[deep], "-")
 	}
-	fmt.Print("X")
-	for i := mid + 1; i <= left; i++ {
-		fmt.Print("-")
+	res[deep] = append(res[deep], "X")
+	for i := mid + 2; i <= right; i++ {
+		res[deep] = append(res[deep], "-")
 	}
-	paint(left, mid)
-	paint(mid+1, right)
+	makeTree(left, mid, deep+1, res)
+	makeTree(mid+1, right, deep+1, res)
 }
 
-8
-0 0 0 0 4 0 0 0
-0 0 4 0 4 0 4 0
+func display(tree [][]string) {
+	for _, v := range tree {
+		for _, k := range v {
+			fmt.Print(k)
+		}
+		fmt.Println()
+	}
+}
