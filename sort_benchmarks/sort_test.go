@@ -8,7 +8,7 @@ import (
 	insert "algorithms/02_compare_sort/inserting"
 	sel "algorithms/02_compare_sort/selecting"
 	recursion "algorithms/07_recursion"
-	shell "algorithms/shell_sort"
+	shell "algorithms/08_shell_sort"
 )
 
 var (
