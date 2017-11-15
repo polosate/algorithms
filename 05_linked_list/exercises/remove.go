@@ -1,8 +1,11 @@
 package exercises
 
-// 1 2 3 4 5
-func RemoveMiddle(list *singleList) {
-	iter1 := list.GetIterator()
-	iter2 := list.GetIterator()
-
+// 1 2 3 5 8 4
+func Remove(el *link) {
+	if el.next == nil {
+		el = nil
+	} else {
+		el.value = el.next.value
+		el.next = el.next.next
+	}
 }
