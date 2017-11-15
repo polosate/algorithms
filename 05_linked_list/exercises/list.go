@@ -30,3 +30,7 @@ func (sl *singleList) InsertFirst(value int64) {
 	newLink.next = sl.first
 	sl.first = newLink
 }
+
+func (sl *singleList) GetIterator() iterator {
+	return NewIterator(sl)
+}
