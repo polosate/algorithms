@@ -1,31 +1,23 @@
 package exercises
 
 func RemoveDups(list *singleList) {
+	if list.first == nil {
+		return
+	}
 
-	var inner, outer, next *link
-	outer = list.first
+	var runner, current *link
+	current = list.first
 
-	for outer != nil {
-
-		if outer.next == nil {
-			return
-		}
-
-		inner = outer
-
-		for inner != nil {
-			if inner.next == nil {
-				break
+	for current != nil {
+		runner = current
+		for runner.next != nil {
+			if runner.next.value == current.value {
+				runner.next = runner.next.next
+			} else {
+				runner = runner.next
 			}
-			next = inner.next
-			if next.value == outer.value {
-				inner.next = next.next
-			}
-
-			inner = inner.next
-
 		}
-		outer = outer.next
+		current = current.next
 	}
 	return
 }
