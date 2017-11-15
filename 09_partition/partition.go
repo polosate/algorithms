@@ -29,7 +29,7 @@ func (a *PartArray) Partition(left, right int, pivot int64) int {
 
 		for i = rightPtr; i > left; i-- {
 			rightPtr--
-			if i > left && a.array[rightPtr] >= pivot {
+			if i > left && a.array[rightPtr] > pivot {
 				continue
 			} else {
 				break
