@@ -4,11 +4,12 @@ import (
 	"math/rand"
 	"testing"
 
-	bubble "algorithms/02_compare_sort/bubble"
+	"algorithms/02_compare_sort/bubble"
 	insert "algorithms/02_compare_sort/inserting"
 	sel "algorithms/02_compare_sort/selecting"
 	recursion "algorithms/07_recursion"
 	shell "algorithms/08_shell_sort"
+	quick "algorithms/10_quick_sort"
 )
 
 var (
@@ -17,11 +18,12 @@ var (
 	insertA insert.IArray
 	selectA sel.SArray
 	shellA  shell.ShellArray
+	quickA  quick.QuickSortArray
 )
 
 func TestMain(m *testing.M) {
-	res := []int64{}
-	for i := 0; i < 500000	; i++ {
+	var res []int64
+	for i := 0; i < 500000; i++ {
 		res = append(res, int64(rand.Int()))
 	}
 	mergeA = recursion.NewMArray(res)
@@ -29,7 +31,12 @@ func TestMain(m *testing.M) {
 	insertA = insert.NewIArray(res)
 	selectA = sel.NewSArray(res)
 	shellA = shell.NewShellArray(res)
+	quickA = quick.NewQuickSortArray(res)
 	m.Run()
+}
+
+func BenchmarkQuickSort(b *testing.B) {
+	quickA.QuickSort()
 }
 
 func BenchmarkShellSort(b *testing.B) {
