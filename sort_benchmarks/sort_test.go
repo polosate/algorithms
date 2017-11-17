@@ -12,6 +12,11 @@ import (
 	quick "algorithms/10_quick_sort"
 )
 
+const (
+	smallSize = 50000
+	bigSize   = 5000000
+)
+
 var (
 	mergeA  recursion.MArray
 	bubbleA bubble.BArray
@@ -21,40 +26,56 @@ var (
 	quickA  quick.QuickSortArray
 )
 
-func TestMain(m *testing.M) {
+func BenchmarkQuickSort(b *testing.B) {
 	var res []int64
-	for i := 0; i < 500000; i++ {
+	for i := 0; i < bigSize; i++ {
 		res = append(res, int64(rand.Int()))
 	}
-	mergeA = recursion.NewMArray(res)
-	bubbleA = bubble.NewBArray(res)
-	insertA = insert.NewIArray(res)
-	selectA = sel.NewSArray(res)
-	shellA = shell.NewShellArray(res)
 	quickA = quick.NewQuickSortArray(res)
-	m.Run()
-}
-
-func BenchmarkQuickSort(b *testing.B) {
 	quickA.QuickSort()
 }
 
 func BenchmarkShellSort(b *testing.B) {
+	var res []int64
+	for i := 0; i < bigSize; i++ {
+		res = append(res, int64(rand.Int()))
+	}
+	shellA = shell.NewShellArray(res)
 	shellA.ShellSort()
 }
 
 func BenchmarkMergeSort(b *testing.B) {
+	var res []int64
+	for i := 0; i < bigSize; i++ {
+		res = append(res, int64(rand.Int()))
+	}
+	mergeA = recursion.NewMArray(res)
 	mergeA.MergeSort()
 }
 
 func BenchmarkInsertingSort(b *testing.B) {
+	var res []int64
+	for i := 0; i < smallSize; i++ {
+		res = append(res, int64(rand.Int()))
+	}
+	insertA = insert.NewIArray(res)
 	insertA.InsertingSort()
 }
 
 func BenchmarkSelectionSort(b *testing.B) {
+	var res []int64
+	for i := 0; i < smallSize; i++ {
+		res = append(res, int64(rand.Int()))
+	}
+	selectA = sel.NewSArray(res)
 	selectA.SelectingSort()
 }
 
 func BenchmarkBubbleSort(b *testing.B) {
+	var res []int64
+	for i := 0; i < smallSize; i++ {
+		res = append(res, int64(rand.Int()))
+	}
+	bubbleA = bubble.NewBArray(res)
 	bubbleA.BubbleSort()
 }
