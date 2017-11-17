@@ -28,9 +28,8 @@ func (a *QuickSortArray) reqQuickSort(left, right int) {
 func (a *QuickSortArray) partition(left, right int, pivot int64) int {
 	leftPtr := left - 1
 	rightPtr := right
-	i := 0
 	for {
-		for i = leftPtr; i < right; i++ {
+		for leftPtr < right {
 			leftPtr++
 			if a.array[leftPtr] < pivot {
 				continue
@@ -39,7 +38,7 @@ func (a *QuickSortArray) partition(left, right int, pivot int64) int {
 			}
 		}
 
-		for i = rightPtr; i > left; i++ {
+		for rightPtr > left {
 			rightPtr--
 			if a.array[rightPtr] > pivot {
 				continue
