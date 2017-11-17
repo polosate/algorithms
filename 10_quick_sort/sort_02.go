@@ -4,10 +4,11 @@ import "fmt"
 
 type QuickSortArray2 struct {
 	array []int64
+	level int
 }
 
-func NewQuickSortArray2(array []int64) QuickSortArray {
-	return QuickSortArray{array: array}
+func NewQuickSortArray2(array []int64) QuickSortArray2 {
+	return QuickSortArray2{array: array, level: 0}
 }
 
 func (a *QuickSortArray2) QuickSort() {
@@ -15,22 +16,36 @@ func (a *QuickSortArray2) QuickSort() {
 }
 
 func (a *QuickSortArray2) reqQuickSort(left, right int) {
-	if right-left <= 3 {
-		a.manuailSort()
+	if right-left+1 <= 3 {
+		a.manualSort(left, right)
 	} else {
-		pivot := a.array[right]
-		partition := a.partition(left, right, pivot)
+		median := a.medianOf3(left, right)
+		partition := a.partition(left, right, median)
 		a.reqQuickSort(left, partition-1)
 		a.reqQuickSort(partition+1, right)
 	}
 }
 
+func (a *QuickSortArray2) medianOf3(left, right int) int64 {
+	center := (left + right) / 2
+	if a.array[left] > a.array[center] {
+		a.swap(left, center)
+	}
+	if a.array[left] > a.array[right] {
+		a.swap(left, right)
+	}
+	if a.array[center] > a.array[right] {
+		a.swap(center, right)
+	}
+	a.swap(center, right-1)
+	return a.array[right-1]
+}
+
 func (a *QuickSortArray2) partition(left, right int, pivot int64) int {
-	leftPtr := left - 1
-	rightPtr := right
-	i := 0
+	leftPtr := left
+	rightPtr := right - 1
 	for {
-		for i = leftPtr; i < right; i++ {
+		for {
 			leftPtr++
 			if a.array[leftPtr] < pivot {
 				continue
@@ -39,7 +54,7 @@ func (a *QuickSortArray2) partition(left, right int, pivot int64) int {
 			}
 		}
 
-		for i = rightPtr; i > left; i++ {
+		for {
 			rightPtr--
 			if a.array[rightPtr] > pivot {
 				continue
@@ -54,26 +69,30 @@ func (a *QuickSortArray2) partition(left, right int, pivot int64) int {
 			a.swap(leftPtr, rightPtr)
 		}
 	}
-	a.swap(leftPtr, right)
+	a.swap(leftPtr, right-1)
 	return leftPtr
 }
 
-func (a *QuickSortArray2) manualSort() {
-}
+func (a *QuickSortArray2) manualSort(left, right int) {
+	size := right - left + 1
+	if size <= 1 {
 
-func (a *QuickSortArray2) medianOf3(left, right int) int64 {
-	center := (left + right) / 2
-	if a.array[left] > a.array[center] {
-		a.swap(left, center)
+	} else if size == 2 {
+		if a.array[left] > a.array[right] {
+			a.swap(left, right)
+		}
+
+	} else if size == 3 {
+		if a.array[left] > a.array[right-1] {
+			a.swap(left, right-1)
+		}
+		if a.array[left] > a.array[right] {
+			a.swap(left, right)
+		}
+		if a.array[right-1] > a.array[right] {
+			a.swap(right-1, right)
+		}
 	}
-	if a.array[center] > a.array[right] {
-		a.swap(center, right)
-	}
-	if a.array[left] > a.array[right] {
-		a.swap(left, right)
-	}
-	a.swap(center, right)
-	return a.array[right]
 }
 
 func (a *QuickSortArray2) swap(ind1, ind2 int) {
