@@ -1,10 +1,35 @@
 package _9_partition
 
-//
-//import (
-//	"fmt"
-//	"testing"
-//)
+import (
+	"testing"
+)
+
+func TestMedian(t *testing.T) {
+	array := []int64{0, 3, 1, 6, 4, 5, 2, 7}
+	med := Median(array)
+	if med != 4 {
+		t.Error("Want median", 4, "have", med)
+	}
+
+	array = []int64{0, 3, 1, 6, 4, 5, 2}
+	med = Median(array)
+	if med != 3 {
+		t.Error("Want median", 3, "have", med)
+	}
+
+	array = []int64{0, 3, 1, 6, 4, 5, 7}
+	med = Median(array)
+	if med != 4 {
+		t.Error("Want median", 4, "have", med)
+	}
+
+	array = []int64{0, 3, 1, 6, 4, 5, 7, 2}
+	med = Median(array)
+	if med != 4 {
+		t.Error("Want median", 4, "have", med)
+	}
+}
+
 //
 //func TestSmallPartition(t *testing.T) {
 //
