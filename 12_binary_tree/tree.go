@@ -49,17 +49,57 @@ func (t *Tree) Remove(key int64) *Node {
 	if current == nil {
 		return nil
 	}
-	if current.rightChild == nil && current.leftChild == nil {
-		if current == t.root {
+
+	// Element is root
+	if current == t.root {
+		if current.rightChild == nil && current.leftChild == nil {
 			t.root = nil
 			return current
 		}
-		if parent.leftChild.GetValue() == key {
+		if current.rightChild == nil {
+			t.root = current.leftChild
+			return current
+		}
+		if current.leftChild == nil {
+			t.root = current.rightChild
+			return current
+		}
+	}
+
+	isRightChild := false
+	if parent.rightChild != nil && parent.rightChild.GetValue() == key {
+		isRightChild = true
+	}
+
+	// Element is leaf
+	if current.rightChild == nil && current.leftChild == nil {
+		if isRightChild {
+			parent.rightChild = nil
+			return current
+		} else {
 			parent.leftChild = nil
 			return current
 		}
-		if parent.rightChild.GetValue() == key {
-			parent.rightChild = nil
+	}
+
+	// Element has only left child
+	if current.rightChild == nil {
+		if isRightChild {
+			parent.rightChild = current.leftChild
+			return current
+		} else {
+			parent.leftChild = current.leftChild
+			return current
+		}
+	}
+
+	// Element has only right child
+	if current.leftChild == nil {
+		if isRightChild {
+			parent.rightChild = current.rightChild
+			return current
+		} else {
+			parent.leftChild = current.rightChild
 			return current
 		}
 	}

@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestTree(t *testing.T) {
+func TestTreeInsert(t *testing.T) {
 	tree := NewTree()
 
 	tree.Insert(55)
@@ -28,9 +28,59 @@ func TestTree(t *testing.T) {
 	if parent.leftChild != current {
 		t.Error("Warning!")
 	}
+}
 
-	//for i := 0; i < 10; i++ {
-	//	tree.Insert(int64(rand.Intn(50)))
-	//}
-	//tree.TraversInOrder()
+func TestTreeRemoveRootWithoutChildren(t *testing.T) {
+	tree := NewTree()
+
+	tree.Insert(55)
+	el := tree.Remove(55)
+	if el.GetValue() != 55 {
+		t.Error()
+	}
+	if tree.root != nil {
+		t.Error()
+	}
+}
+
+func TestTreeRemoveLeaf(t *testing.T) {
+	tree := NewTree()
+
+	tree.Insert(61)
+	tree.Insert(53)
+	el := tree.Remove(53)
+	if el.GetValue() != 53 {
+		t.Error()
+	}
+	if tree.root.rightChild != nil || tree.root.leftChild != nil {
+		t.Error()
+	}
+}
+
+func TestTreeRemoveRootWithLeftChild(t *testing.T) {
+	tree := NewTree()
+
+	tree.Insert(60)
+	tree.Insert(50)
+	el := tree.Remove(60)
+	if el.GetValue() != 60 {
+		t.Error()
+	}
+	if tree.root.GetValue() != 50 {
+		t.Error()
+	}
+}
+
+func TestTreeRemoveRootWithRightChild(t *testing.T) {
+	tree := NewTree()
+
+	tree.Insert(60)
+	tree.Insert(70)
+	el := tree.Remove(60)
+	if el.GetValue() != 60 {
+		t.Error()
+	}
+	if tree.root.GetValue() != 70 {
+		t.Error()
+	}
 }
