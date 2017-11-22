@@ -1,0 +1,3 @@
+package: algorithms
+import:
+- package: gopkg.in/check.v1

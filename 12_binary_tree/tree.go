@@ -64,7 +64,7 @@ func (t *Tree) Remove(key int64) *Node {
 		}
 	}
 
-
+	return nil
 }
 
 func (t *Tree) find(key int64) (node *Node, parent *Node) {
