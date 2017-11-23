@@ -107,6 +107,16 @@ func (t *Tree) Remove(key int64) *Node {
 	return nil
 }
 
+func (t *Tree) getSuccessor(node *Node) *Node {
+	
+
+	successor := node.rightChild
+	for successor.leftChild != nil {
+		successor = successor.leftChild
+	}
+	return successor
+}
+
 func (t *Tree) find(key int64) (node *Node, parent *Node) {
 	current := t.root
 	for current != nil && current.GetValue() != key {
