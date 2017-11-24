@@ -1,4 +1,4 @@
-package _2_binary_tree
+package search_tree
 
 import (
 	"testing"

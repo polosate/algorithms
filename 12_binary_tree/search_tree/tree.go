@@ -1,4 +1,4 @@
-package _2_binary_tree
+package search_tree
 
 type Tree struct {
 	root *Node
