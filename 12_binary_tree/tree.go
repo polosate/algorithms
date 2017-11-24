@@ -45,25 +45,29 @@ func (t *Tree) TraversInOrder() {
 }
 
 func (t *Tree) Remove(key int64) *Node {
-	current, parent := t.find(key)
-	if current == nil {
+	delNode, parent := t.find(key)
+	if delNode == nil {
 		return nil
 	}
 
-	// Element is root
-	if current == t.root {
-		if current.rightChild == nil && current.leftChild == nil {
+	// delNode is root
+	if delNode == t.root {
+		if delNode.rightChild == nil && delNode.leftChild == nil {
 			t.root = nil
-			return current
+			return delNode
 		}
-		if current.rightChild == nil {
-			t.root = current.leftChild
-			return current
+		if delNode.rightChild == nil {
+			t.root = delNode.leftChild
+			return delNode
 		}
-		if current.leftChild == nil {
-			t.root = current.rightChild
-			return current
+		if delNode.leftChild == nil {
+			t.root = delNode.rightChild
+			return delNode
 		}
+		successor := t.getSuccessor(delNode)
+		t.root = successor
+		t.root.leftChild = delNode.leftChild
+		return delNode
 	}
 
 	isRightChild := false
@@ -71,48 +75,64 @@ func (t *Tree) Remove(key int64) *Node {
 		isRightChild = true
 	}
 
-	// Element is leaf
-	if current.rightChild == nil && current.leftChild == nil {
+	// delNode is leaf
+	if delNode.rightChild == nil && delNode.leftChild == nil {
 		if isRightChild {
 			parent.rightChild = nil
-			return current
+			return delNode
 		} else {
 			parent.leftChild = nil
-			return current
+			return delNode
 		}
 	}
 
-	// Element has only left child
-	if current.rightChild == nil {
+	// delNode has only left child
+	if delNode.rightChild == nil {
 		if isRightChild {
-			parent.rightChild = current.leftChild
-			return current
+			parent.rightChild = delNode.leftChild
+			return delNode
 		} else {
-			parent.leftChild = current.leftChild
-			return current
+			parent.leftChild = delNode.leftChild
+			return delNode
 		}
 	}
 
-	// Element has only right child
-	if current.leftChild == nil {
+	// delNode has only right child
+	if delNode.leftChild == nil {
 		if isRightChild {
-			parent.rightChild = current.rightChild
-			return current
+			parent.rightChild = delNode.rightChild
+			return delNode
 		} else {
-			parent.leftChild = current.rightChild
-			return current
+			parent.leftChild = delNode.rightChild
+			return delNode
 		}
 	}
 
-	return nil
+	// delNode has both children
+	successor := t.getSuccessor(delNode)
+	if isRightChild {
+		parent.rightChild = successor
+	} else {
+		parent.leftChild = successor
+	}
+	successor.leftChild = delNode.leftChild
+	return delNode
 }
 
-func (t *Tree) getSuccessor(node *Node) *Node {
-	
+func (t *Tree) getSuccessor(delNode *Node) *Node {
+	successor := delNode
+	successorParent := delNode
+	current := successor.rightChild
 
-	successor := node.rightChild
-	for successor.leftChild != nil {
-		successor = successor.leftChild
+	for current != nil {
+		successorParent = successor
+		successor = current
+		current = current.leftChild
+	}
+
+	if successor != delNode.rightChild {
+		successorParent.leftChild = successor.rightChild
+		successor.rightChild = delNode.rightChild
 	}
 	return successor
 }
