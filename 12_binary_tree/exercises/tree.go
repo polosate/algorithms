@@ -1,7 +1,5 @@
 package exercises
 
-import "fmt"
-
 //type nodeLink struct {
 //	node Node
 //	next *nodeLink
@@ -48,6 +46,7 @@ func NewLink(node Tree) *link {
 
 type list struct {
 	first *link
+	last  *link
 }
 
 func NewList() list {
@@ -60,11 +59,28 @@ func (l *list) IsEmpty() bool {
 
 func (l *list) InsertFirst(tree Tree) {
 	newLink := NewLink(tree)
+	if l.IsEmpty() {
+		l.last = newLink
+	}
 	newLink.next = l.first
 	l.first = newLink
 }
 
+func (l *list) InsertLast(tree Tree) {
+	newLink := NewLink(tree)
+	if l.IsEmpty() {
+		l.first = newLink
+		l.last = newLink
+		return
+	}
+	l.last.next = newLink
+	l.last = newLink
+}
+
 func (l *list) RemoveFirst() Tree {
+	if l.first == l.last {
+		l.last = nil
+	}
 	temp := l.first
 	l.first = temp.next
 	return temp.tree
@@ -113,25 +129,14 @@ func NewBalancedTree(array []string) Tree {
 		newTree := newTree(newNode)
 		newList.InsertFirst(*newTree)
 	}
-	for newList.first.next != nil {
-		fmt.Println("+++++++++++++++++++")
-		current := newList.first
-		for current.next != nil {
-			fmt.Println("======")
-			fmt.Println(current.tree.root)
-			l1 := newList.RemoveFirst()
-			l2 := newList.RemoveFirst()
-			current = newList.first
-			resTree := newTree(NewNode("+"))
-			resTree.root.leftChild = l1.root
-			resTree.root.rightChild = l2.root
-			newList.InsertFirst(*resTree)
 
-			//current = current.next
-			//fmt.Println(current.tree.root)
-			fmt.Println("======")
-		}
-		fmt.Println("+++++++++++++++++++")
+	for newList.first.next != nil {
+		l1 := newList.RemoveFirst()
+		l2 := newList.RemoveFirst()
+		resTree := newTree(NewNode("+"))
+		resTree.root.leftChild = l1.root
+		resTree.root.rightChild = l2.root
+		newList.InsertLast(*resTree)
 	}
 	return newList.RemoveFirst()
 }
