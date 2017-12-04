@@ -14,35 +14,6 @@ func TestBuildTree(t *testing.T) {
 	fmt.Println(tr.root.leftChild.rightChild.value)
 }
 
-//a b c d e f g
-
-//c d e f g +
-//          ab
-
-// e f g  +  +
-//       ab  cd
-
-// g   +   +   +
-//    ab  cd   ef
-
-//  +   +    +
-// cd  ef   g +
-//            ab
-
-//    +     +
-//   g +   + +
-//     ab cd ef
-
-//       +
-//    +     +
-//   g +   + +
-//     ab cd ef
-
-//+
-//++
-//A+++
-//-G FE DC B
-
 func TestBalancedTree(t *testing.T) {
 	tr := NewBalancedTree([]string{"A", "B", "C", "D", "E", "F", "G"})
 	r1 := tr.root
@@ -63,6 +34,20 @@ func TestBalancedTree(t *testing.T) {
 	fmt.Print(r5.rightChild.value)
 	fmt.Print(r6.leftChild.value)
 	fmt.Print(r6.rightChild.value)
-	fmt.Println(r7.leftChild.value)
+	fmt.Print(r7.leftChild.value)
 	fmt.Println(r7.rightChild.value)
+}
+
+func TestFullTree(t *testing.T) {
+	tr := NewFullTree([]string{"A", "B", "C", "D", "E", "F"})
+	r1 := tr.root
+	fmt.Println(r1.value)
+	fmt.Print(r1.leftChild.value)
+	fmt.Println(r1.rightChild.value)
+	r2 := r1.leftChild
+	r3 := r1.rightChild
+	fmt.Print(r2.leftChild.value)
+	fmt.Print(r2.rightChild.value)
+	fmt.Print(r3.leftChild.value)
+	fmt.Println("-")
 }

@@ -141,6 +141,40 @@ func NewBalancedTree(array []string) Tree {
 	return newList.RemoveFirst()
 }
 
+// 2*i + 1  right child
+// 2*i + 2  left child
+// 0 1 2 3 4 5
+// A B C D E F
+//     A
+//   B   C
+// D E  F -
+func NewFullTree(array []string) Tree {
+	root := NewNode(array[0])
+	tree := newTree(root)
+	recFullTree(0, root, array)
+	return *tree
+
+}
+
+func recFullTree(ind int, node *Node, array []string) {
+	if 2*ind+1 > len(array)-1 {
+		return
+	} else {
+		if 2*ind+2 > len(array)-1 {
+			leftChild := NewNode(array[2*ind+1])
+			node.leftChild = leftChild
+		} else {
+			leftChild := NewNode(array[2*ind+1])
+			node.leftChild = leftChild
+			recFullTree(2*ind+1, leftChild, array)
+			rightChild := NewNode(array[2*ind+2])
+			node.rightChild = rightChild
+			recFullTree(2*ind+2, rightChild, array)
+		}
+
+	}
+}
+
 func (t *Tree) DisplayTree() {
 
 }
