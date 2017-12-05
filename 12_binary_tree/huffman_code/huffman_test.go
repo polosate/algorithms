@@ -6,7 +6,7 @@ import (
 )
 
 func TestNewHuffmanCode(t *testing.T) {
-	h := NewHuffmanCode("susi say that it is easy")
+	h := NewHuffmanCode("susi say that it is easy\n stop it\n")
 	h.makeFrequencyMap()
 	fmt.Println(h.frequencyMap)
 }
