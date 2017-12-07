@@ -2,6 +2,7 @@ package huffman_code
 
 import (
 	"bytes"
+	"fmt"
 )
 
 type hCode struct {
@@ -16,6 +17,10 @@ func (h *hCode) Encode(text []byte) (encoded []byte) {
 	fMap := makeFrequencyMap(text)
 	h.buildTree(fMap)
 	codeMap := buildCodeMap(h.hTree)
+	for k, v := range codeMap {
+		fmt.Println(string(k), v)
+	}
+
 	for _, v := range text {
 		encoded = append(encoded, []byte(codeMap[v])...)
 	}

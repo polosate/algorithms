@@ -6,7 +6,7 @@ import (
 )
 
 func TestNewHuffmanCode(t *testing.T) {
-	path := "/home/ashaposhnikova/output/input2"
+	path := "/home/polosate/huffman/input"
 	text, err := ioutil.ReadFile(path)
 	if err != nil {
 		panic(err)
