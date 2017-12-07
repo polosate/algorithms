@@ -1,3 +1,4 @@
 package: algorithms
 import:
 - package: gopkg.in/check.v1
+- package: github.com/icza/bitio

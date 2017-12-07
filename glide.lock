@@ -1,6 +1,8 @@
-hash: 6e58c262f268649040efc147428de8a9ff25dbc7718bf3ae613d47b4f16b6767
-updated: 2017-11-22T17:53:59.600800079+03:00
+hash: c5667ab5adb7acc27710fd645afaa7ad121f9057feafddde4be780af8a5ead59
+updated: 2017-12-07T18:39:29.055924467+03:00
 imports:
+- name: github.com/icza/bitio
+  version: 261d1004f0535a3c196e0d204587d962b746dbb1
 - name: gopkg.in/check.v1
   version: 64131543e7896d5bcc6bd5a76287eb75ea96c673
 testImports: []

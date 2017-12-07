@@ -19,7 +19,6 @@ func (h *hCode) Encode(text []byte) (encoded []byte) {
 	for _, v := range text {
 		encoded = append(encoded, []byte(codeMap[v])...)
 	}
-
 	return encoded
 }
 

@@ -6,7 +6,8 @@ import (
 )
 
 func TestNewHuffmanCode(t *testing.T) {
-	text, err := ioutil.ReadFile("/home/ashaposhnikova/output/input")
+	path := "/home/ashaposhnikova/output/input2"
+	text, err := ioutil.ReadFile(path)
 	if err != nil {
 		panic(err)
 	}
@@ -14,7 +15,7 @@ func TestNewHuffmanCode(t *testing.T) {
 	h := New()
 
 	encoded := h.Encode(text)
-	err = ioutil.WriteFile("/home/ashaposhnikova/output/out", encoded, 0666)
+	err = ioutil.WriteFile(path+"_out", encoded, 0666)
 	if err != nil {
 		panic(err)
 	}
