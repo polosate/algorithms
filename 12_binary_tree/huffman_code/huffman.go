@@ -12,24 +12,18 @@ func New() hCode {
 	return hCode{}
 }
 
-func (h *hCode) Encode(text string) string {
-	return h.encode([]byte(text))
-}
-
-func (h *hCode) encode(text []byte) string {
+func (h *hCode) Encode(text []byte) (encoded []byte) {
 	fMap := makeFrequencyMap(text)
 	h.buildTree(fMap)
 	codeMap := buildCodeMap(h.hTree)
-
-	encoded := ""
 	for _, v := range text {
-		encoded += codeMap[v]
+		encoded = append(encoded, []byte(codeMap[v])...)
 	}
+
 	return encoded
 }
 
-func (h *hCode) decode(encoded string) string {
-	decoded := []byte{}
+func (h *hCode) Decode(encoded []byte) (decoded []byte) {
 	current := h.hTree.root
 	for i := range encoded {
 		if encoded[i] == byte('0') {
@@ -43,7 +37,7 @@ func (h *hCode) decode(encoded string) string {
 			continue
 		}
 	}
-	return string(decoded)
+	return
 }
 
 func makeFrequencyMap(text []byte) map[byte]int {
