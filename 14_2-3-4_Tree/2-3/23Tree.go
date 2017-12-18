@@ -31,50 +31,20 @@ func (t *tree) find(key int64) int {
 func (t *tree) insert(key int64) {
 	newItem := newDataItem(key)
 	curNode := t.root
-	for {
-		if curNode.isFull() {
-			t.split(curNode)
-			curNode = curNode.getParent()
-			curNode = getNextChild(curNode, key)
-		} else if curNode.isLeaf() {
-			break
-		} else {
-			curNode = getNextChild(curNode, key)
-		}
+
+	for !curNode.isLeaf() {
+		curNode = getNextChild(curNode, key)
 	}
-	curNode.insertItem(newItem)
+
+	if curNode.getNumItems() == 1 {
+		curNode.insertItem(newItem)
+	} else {
+
+	}
 }
 
-func (t *tree) split(curNode *node) {
-	var (
-		child2, child3, parent *node
-		itemB, itemC           *dataItem
-	)
+func (t *tree) split(curNode *node) *node {
 
-	itemC = curNode.removeItem()
-	itemB = curNode.removeItem()
-	child3 = curNode.disconnectChild(3)
-	child2 = curNode.disconnectChild(2)
-	rightNode := newNode()
-
-	if curNode == t.root {
-		t.root = newNode()
-		parent = t.root
-		t.root.connectChild(0, curNode)
-	} else {
-		parent = curNode.getParent()
-	}
-	itemIndex := parent.insertItem(itemB)
-	n := parent.numItems
-	for i := n - 1; i > itemIndex; i-- {
-		tempChild := parent.disconnectChild(i)
-		parent.connectChild(i+1, tempChild)
-	}
-	parent.connectChild(itemIndex+1, rightNode)
-
-	rightNode.insertItem(itemC)
-	rightNode.connectChild(0, child2)
-	rightNode.connectChild(1, child3)
 }
 
 func (t *tree) displayTree() {
@@ -101,7 +71,7 @@ func getNextChild(curNode *node, key int64) *node {
 	i := 0
 	for ; i < curNode.numItems; i++ {
 		if curNode.itemArray[i].key > key {
-			return curNode.childArray[i]
+			return curNode.getChild(i)
 		}
 	}
 	return curNode.childArray[i]

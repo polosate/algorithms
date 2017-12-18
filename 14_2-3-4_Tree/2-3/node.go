@@ -2,7 +2,7 @@ package __3_4
 
 import "fmt"
 
-const order = 4
+const order = 3
 
 type node struct {
 	childArray []*node
@@ -35,20 +35,15 @@ func (n *node) findItem(key int64) int {
 func (n *node) insertItem(newItem *dataItem) int {
 	n.numItems++
 	newKey := newItem.key
-	for i := order - 2; i >= 0; i-- {
-		if n.itemArray[i] == nil {
-			continue
-		} else {
-			if n.itemArray[i].key > newKey {
-				n.itemArray[i+1] = n.itemArray[i]
-			} else {
-				n.itemArray[i+1] = newItem
-				return i + 1
-			}
-		}
+
+	if newKey < n.itemArray[0].key {
+		n.itemArray[1] = n.itemArray[0]
+		n.itemArray[0] = newItem
+		return 0
+	} else {
+		n.itemArray[1] = newItem
+		return 1
 	}
-	n.itemArray[0] = newItem
-	return 0
 }
 
 func (n *node) removeItem() *dataItem {
