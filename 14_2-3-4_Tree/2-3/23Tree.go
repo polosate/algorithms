@@ -1,6 +1,8 @@
 package __3_4
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type tree struct {
 	root *node
@@ -39,11 +41,12 @@ func (t *tree) insert(key int64) {
 	if curNode.getNumItems() == 1 {
 		curNode.insertItem(newItem)
 	} else {
-
+		t.split(curNode, newItem)
 	}
 }
 
-func (t *tree) split(curNode *node) *node {
+func (t *tree) split(curNode *node, item *dataItem) {
+	rightNode := newNode()
 
 }
 
