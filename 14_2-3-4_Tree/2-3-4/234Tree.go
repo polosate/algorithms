@@ -77,6 +77,14 @@ func (t *tree) split(curNode *node) {
 	rightNode.connectChild(1, child3)
 }
 
+func (t *tree) min() int64 {
+	curNode := t.root
+	for !curNode.isLeaf() {
+		curNode = curNode.getChild(0)
+	}
+	return curNode.getItem(0).key
+}
+
 func (t *tree) displayTree() {
 	t.recDisplayTree(t.root, 0, 0)
 	fmt.Println()

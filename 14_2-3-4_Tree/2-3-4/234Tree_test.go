@@ -1,12 +1,16 @@
 package __3_4
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func Test234Tree(t *testing.T) {
 	tt := newTree()
 	tt.insert(50)
 	tt.insert(40)
 	tt.insert(60)
+	tt.insert(1)
 	tt.insert(30)
 	tt.insert(70)
 	tt.insert(10)
@@ -17,4 +21,9 @@ func Test234Tree(t *testing.T) {
 	tt.insert(16)
 
 	tt.displayTree()
+
+	min := tt.min()
+	if min != 1 {
+		t.Error("Want min", 1, "have", min)
+	}
 }
