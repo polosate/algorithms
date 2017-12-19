@@ -85,6 +85,22 @@ func (t *tree) min() int64 {
 	return curNode.getItem(0).key
 }
 
+func (t *tree) walk() {
+	t.recWalk(t.root)
+}
+
+func (t *tree) recWalk(curNode *node) {
+	if curNode == nil {
+		return
+	}
+	n := curNode.numItems
+	for i := 0; i < n; i++ {
+		t.recWalk(curNode.getChild(i))
+		curNode.getItem(i).displayDataItem()
+	}
+	t.recWalk(curNode.getChild(n))
+}
+
 func (t *tree) displayTree() {
 	t.recDisplayTree(t.root, 0, 0)
 	fmt.Println()
