@@ -39,12 +39,37 @@ func (t *tree) insert(key int64) {
 	if curNode.getNumItems() == 1 {
 		curNode.insertItem(newItem)
 	} else {
-
+		t.split(curNode, key)
 	}
 }
 
-func (t *tree) split(curNode *node) *node {
+func (t *tree) split(curNode *node, key int64) {
+	var (
+		parent, rightNode *node
+	)
+	newChildNum := 2
 
+	if curNode == t.root {
+		t.root = newNode()
+		parent = t.root
+		t.root.connectChild(0, curNode)
+		newChildNum = 1
+	}
+
+	rightNode = newNode()
+	parent = curNode.getParent()
+
+	if curNode.getItem(0).key > key {
+		parent.insertItem(curNode.getItem(0))
+		curNode.insertItem(newDataItem(key))
+		rightNode.insertItem(curNode.getItem(1))
+	} else if curNode.getItem(1).key < key {
+		parent.insertItem(curNode.getItem(1))
+		rightNode.insertItem(newDataItem(key))
+	} else {
+		parent.insertItem(newDataItem(key))
+	}
+	parent.connectChild(newChildNum, rightNode)
 }
 
 func (t *tree) displayTree() {
