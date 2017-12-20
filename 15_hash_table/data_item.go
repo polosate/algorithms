@@ -2,18 +2,18 @@ package _5_hash_table
 
 import "fmt"
 
-type dataItem struct {
+type DataItem struct {
 	key int64
 }
 
-func newDataItem(key int64) *dataItem {
-	return &dataItem{key: key}
+func NewDataItem(key int64) *DataItem {
+	return &DataItem{key: key}
 }
 
-func (d dataItem) getKey() int64 {
+func (d DataItem) GetKey() int64 {
 	return d.key
 }
 
-func (d dataItem) displayDataItem() {
+func (d DataItem) DisplayDataItem() {
 	fmt.Print(d.key)
 }
