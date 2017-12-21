@@ -19,7 +19,7 @@ func TestInsert(t *testing.T) {
 		t.Error("want", nil, "have", h.find(100))
 	}
 
-	h.display()
+	//h.display()
 
 	if h.delete(31).GetKey() != 31 {
 		t.Error("want", 31, "have", h.find(31).GetKey())
@@ -28,7 +28,7 @@ func TestInsert(t *testing.T) {
 		t.Error("want", nil, "have", h.find(100))
 	}
 
-	h.display()
+	//h.display()
 	h.insert(NewDataItem(61))
-	h.display()
+	//h.display()
 }
