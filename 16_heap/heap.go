@@ -35,7 +35,7 @@ func (h *heap) insert(key int64) (bool, error) {
 	return true, nil
 }
 
-func (h *heap) remove(key int64) (*node, error) {
+func (h *heap) remove() (*node, error) {
 	if h.isEmpty() {
 		return nil, errors.New("heap is empty")
 	}
@@ -58,11 +58,28 @@ func (h *heap) trickleUp(index int) {
 }
 
 func (h *heap) trickleDown(index int) {
-
+	var lagrerChild, leftChild, rightChild int
+	top := h.heapArray[index]
+	for index < h.curSize/2 {
+		leftChild = 2*index + 1
+		rightChild = leftChild + 1
+		if rightChild < h.curSize && h.heapArray[leftChild].getKey() < h.heapArray[rightChild].getKey() {
+			lagrerChild = rightChild
+		} else {
+			lagrerChild = leftChild
+		}
+		if top.getKey() > h.heapArray[lagrerChild].getKey() {
+			break
+		}
+		h.heapArray[index] = h.heapArray[lagrerChild]
+		index = lagrerChild
+	}
+	h.heapArray[index] = top
 }
 
 func (h *heap) displayHeap() {
 	for i := 0; i < h.curSize; i++ {
 		fmt.Print(h.heapArray[i].getKey(), " ")
 	}
+	fmt.Println()
 }
