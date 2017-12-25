@@ -77,6 +77,14 @@ func (h *heap) trickleDown(index int) {
 	h.heapArray[index] = top
 }
 
+func (h *heap) insertAt(index int, newNode *node) {
+	h.heapArray[index] = newNode
+}
+
+func (h *heap) incrementSize() {
+	h.curSize++
+}
+
 func (h *heap) displayHeap() {
 	for i := 0; i < h.curSize; i++ {
 		fmt.Print(h.heapArray[i].getKey(), " ")
