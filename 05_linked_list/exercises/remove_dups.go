@@ -1,6 +1,25 @@
 package exercises
 
-func RemoveDups(list *singleList) {
+func deleteDups01(list *singleList) {
+	dups := map[int64]bool{}
+
+	if list.first.next == nil {
+		return
+	}
+	var prev *link
+	cur := list.first
+	for cur != nil {
+		if dups[cur.value] {
+			prev.next = cur.next
+		} else {
+			dups[cur.value] = true
+			prev = cur
+		}
+		cur = cur.next
+	}
+}
+
+func deleteDups02(list *singleList) {
 	if list.first == nil {
 		return
 	}
