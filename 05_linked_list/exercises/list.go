@@ -34,3 +34,23 @@ func (sl *singleList) InsertFirst(value int64) {
 func (sl *singleList) GetIterator() iterator {
 	return NewIterator(sl)
 }
+
+func (sl *singleList) Reverse() *singleList {
+	if sl.IsEmpty() || sl.first.next == nil {
+		return sl
+	}
+	var prev, cur, next *link
+	cur = sl.first
+	next = cur.next
+	for cur != nil {
+		cur.next = prev
+		if next == nil {
+			sl.first = cur
+			return sl
+		}
+		prev = cur
+		cur = next
+		next = next.next
+	}
+	return sl
+}

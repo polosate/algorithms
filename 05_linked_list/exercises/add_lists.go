@@ -1,5 +1,12 @@
 package exercises
 
+func addDirectLists(l1, l2 *singleList) *singleList {
+	f := addListsRec(l1.Reverse().first, l2.Reverse().first, 0)
+	res := NewSingleList()
+	res.first = f
+	return res.Reverse()
+}
+
 func addLists(l1, l2 *singleList) *singleList {
 	f := addListsRec(l1.first, l2.first, 0)
 	res := NewSingleList()
