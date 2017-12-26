@@ -1,8 +1,8 @@
 package exercises
 
-func partition(list *singleList, k int64) {
+func partition(list *singleList, k int64) *singleList {
 	if list.IsEmpty() || list.first.next == nil {
-		return
+		return list
 	}
 	before := NewSingleList()
 	after := NewSingleList()
@@ -30,4 +30,15 @@ func partition(list *singleList, k int64) {
 		}
 		cur = next
 	}
+
+	if before.IsEmpty() {
+		return after
+	}
+	cur = before.first
+	for cur.next != nil {
+		cur = cur.next
+	}
+	cur.next = after.first
+	return before
+
 }
