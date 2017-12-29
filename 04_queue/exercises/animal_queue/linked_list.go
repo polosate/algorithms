@@ -1,9 +1,11 @@
-package exercises
+package animal_queue
+
+// TODO: implement linked list
 
 type ILinkedList interface {
 	addLast(a IAnimal, order int)
 	removeFirst() IAnimal
-	peekFirstOrder() int
+	peekFirst() ILink
 }
 
 type ILink interface {

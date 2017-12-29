@@ -1,4 +1,4 @@
-package exercises
+package animal_queue
 
 type IAnimalQueue interface {
 	Enqueue(a IAnimal)

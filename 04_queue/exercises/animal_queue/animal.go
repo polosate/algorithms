@@ -1,4 +1,4 @@
-package exercises
+package animal_queue
 
 type IAnimal interface {
 	GetName() string
