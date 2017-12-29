@@ -38,13 +38,17 @@ func (q *queue) remove() (int64, error) {
 	if q.isEmpty() {
 		return 0, errors.New("queue is empty")
 	}
+	q.shift()
+	data, _ := q.oldStack.pop()
+	q.curSize--
+	return data, nil
+}
+
+func (q *queue) shift() {
 	if q.oldStack.isEmpty() {
 		for !q.newStack.isEmpty() {
 			data, _ := q.newStack.pop()
 			q.oldStack.push(data)
 		}
 	}
-	data, _ := q.oldStack.pop()
-	q.curSize--
-	return data, nil
 }
