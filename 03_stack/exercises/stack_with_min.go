@@ -31,6 +31,10 @@ func (s *stackWithMin) isEmpty() bool {
 	return s.top == -1
 }
 
+func (s *stackWithMin) getSize() int {
+	return s.size
+}
+
 func (s *stackWithMin) push(data int64) error {
 	if s.top == s.size-1 {
 		return errors.New("stack is full")

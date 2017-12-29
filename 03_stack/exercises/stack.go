@@ -8,6 +8,7 @@ type iStack interface {
 	peek() (int64, error)
 	isFull() bool
 	isEmpty() bool
+	getSize() int
 }
 
 type stack struct {
@@ -30,6 +31,10 @@ func (s *stack) isFull() bool {
 
 func (s *stack) isEmpty() bool {
 	return s.top == -1
+}
+
+func (s *stack) getSize() int {
+	return s.size
 }
 
 func (s *stack) push(data int64) error {
