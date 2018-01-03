@@ -5,6 +5,7 @@ import (
 )
 
 func TestHeapSort(t *testing.T) {
-	unsorted := []int64{81, 6, 23, 38, 95, 71, 72, 39, 34, 53}
+	unsorted := []int64{9, 1, 2, 4, 10, 7, 8, 5, 3, 6}
 	heapSort(unsorted)
+
 }
