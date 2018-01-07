@@ -77,12 +77,20 @@ func (h *heap) trickleDown(index int) {
 	h.heapArray[index] = top
 }
 
-func (h *heap) insertAt(index int, newNode *node) {
-	h.heapArray[index] = newNode
+func (h *heap) toss(key int64) bool {
+	if h.curSize == h.size {
+		return false
+	}
+	newNode := newNode(key)
+	h.heapArray[h.curSize] = newNode
+	h.curSize++
+	return true
 }
 
-func (h *heap) incrementSize() {
-	h.curSize++
+func (h *heap) restoreHeap() {
+	for i := h.curSize/2 - 1; i >= 0; i-- {
+		h.trickleDown(i)
+	}
 }
 
 func (h *heap) displayHeap() {
