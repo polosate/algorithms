@@ -23,6 +23,10 @@ func (h *heap) isEmpty() bool {
 	return h.curSize == 0
 }
 
+func (h *heap) isFull() bool {
+	return h.curSize == h.size
+}
+
 func (h *heap) insert(key int64) (bool, error) {
 	if h.curSize == h.size {
 		return false, errors.New("heap is full")
