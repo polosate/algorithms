@@ -3,7 +3,7 @@ package _6_heap
 import "testing"
 
 func TestPriorityQueue(t *testing.T) {
-	q := newPriorityQ(10)
+	q := newPQHeap(10)
 	if !q.isEmpty() {
 		t.Error()
 	}

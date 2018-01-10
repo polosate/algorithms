@@ -1,31 +1,31 @@
 package _6_heap
 
-type priorityQ struct {
+type pqHeap struct {
 	h heap
 }
 
-func newPriorityQ(size int) priorityQ {
-	return priorityQ{
+func newPQHeap(size int) IPriorityQueue {
+	return &pqHeap{
 		h: NewHeap(size),
 	}
 }
 
-func (pq *priorityQ) isEmpty() bool {
+func (pq *pqHeap) isEmpty() bool {
 	return pq.h.isEmpty()
 }
 
-func (pq *priorityQ) isFull() bool {
+func (pq *pqHeap) isFull() bool {
 	return pq.h.isFull()
 }
 
-func (pq *priorityQ) insert(key int64) {
+func (pq *pqHeap) insert(key int64) {
 	if pq.isFull() {
 		return
 	}
 	pq.h.insert(key)
 }
 
-func (pq *priorityQ) remove() int64 {
+func (pq *pqHeap) remove() int64 {
 	if pq.isEmpty() {
 		return -1
 	}
@@ -36,7 +36,7 @@ func (pq *priorityQ) remove() int64 {
 	return n.getKey()
 }
 
-func (pq *priorityQ) peek() int64 {
+func (pq *pqHeap) peek() int64 {
 	if pq.isEmpty() {
 		return -1
 	}
