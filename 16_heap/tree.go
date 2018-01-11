@@ -50,13 +50,34 @@ func (t *tree) removeMax() int64 {
 	if t.isEmpty() {
 		return -1
 	}
-	for
-}
+	current := t.root
+	var parent *treeNode
+	for {
+		parent = current
+		if current.rightChild == nil {
+			break
+		}
+		current = current.rightChild
+	}
+	if current == parent {
+		t.root = parent.leftChild
+	} else if current.leftChild != nil {
+		parent.rightChild = current.leftChild
+	} else {
+		parent.rightChild = nil
 
-func (t *tree) find() *treeNode {
+	}
+	return current.value
 
 }
 
 func (t *tree) findMax() int64 {
-
+	if t.isEmpty() {
+		return -1
+	}
+	current := t.root
+	for current.rightChild != nil {
+		current = current.rightChild
+	}
+	return current.value
 }
