@@ -2,7 +2,7 @@ package _7_graph
 
 import "testing"
 
-func TestGraph(t *testing.T) {
+func TestGraphDPS(t *testing.T) {
 	g := newGraph(10)
 	g.addVertex("A") // 0
 	g.addVertex("B") // 1
@@ -23,4 +23,5 @@ func TestGraph(t *testing.T) {
 	g.addEdge(6, 8)
 
 	g.dfs()
+	g.bfs()
 }
