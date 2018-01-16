@@ -1,4 +1,4 @@
-package _7_graph
+package non_direction
 
 type vertex struct {
 	label      string

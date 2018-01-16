@@ -1,9 +1,9 @@
-package _7_graph
+package non_direction
 
 import (
 	"fmt"
 
-	stack "algorithms/03_stack"
+	"algorithms/03_stack"
 )
 
 type graph struct {
@@ -77,6 +77,30 @@ func (g *graph) bfs() {
 			g.vertexList[v2].wasVisited = true
 			g.displayVertex(v2)
 			q.add(v2)
+		}
+	}
+	fmt.Println()
+	for i := 0; i < g.vertexCount; i++ {
+		g.vertexList[i].wasVisited = false
+	}
+}
+
+func (g *graph) mst() {
+	fmt.Println("======= Minimum spanning tree =======")
+	s := stack.NewIntStack(g.maxVertex)
+	g.vertexList[0].wasVisited = true
+	s.Push(0)
+	for !s.IsEmpty() {
+		current, _ := s.Peek()
+		v := g.getAdjUnvisitedVertex(int(current))
+		if v == -1 {
+			s.Pop()
+		} else {
+			g.vertexList[v].wasVisited = true
+			s.Push(int64(v))
+			g.displayVertex(int(current))
+			g.displayVertex(v)
+			fmt.Print(" ")
 		}
 	}
 	fmt.Println()

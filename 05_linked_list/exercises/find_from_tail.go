@@ -20,7 +20,6 @@ func FindFromTail(list *singleList, k int) (int64, error) {
 		}
 	}
 
-
 	iter2 := list.GetIterator()
 	for iter1.GetCurrent().next != nil {
 		iter1.NextLink()

@@ -1,4 +1,4 @@
-package _7_graph
+package non_direction
 
 import (
 	abstractQ "algorithms/04_queue"

@@ -9,7 +9,7 @@ func makeTeams(prefix string, group string, size int) []string {
 		return []string{}
 	}
 	result := []string{}
-	result = append(result, makeTeams(prefix+string(groupB[0]), string(groupB[1:]), size - 1)...)
+	result = append(result, makeTeams(prefix+string(groupB[0]), string(groupB[1:]), size-1)...)
 	result = append(result, makeTeams(prefix, string(groupB[1:]), size)...)
 	return result
 }
