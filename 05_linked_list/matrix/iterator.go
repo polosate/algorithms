@@ -9,7 +9,7 @@ type iterator struct {
 
 func NewIterator(l *list) iterator {
 	iterator := iterator{
-		myList:   l,
+		myList: l,
 	}
 	iterator.Reset()
 	return iterator

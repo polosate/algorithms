@@ -1,5 +1,7 @@
 package exercises
 
+import "math"
+
 //type nodeLink struct {
 //	node Node
 //	next *nodeLink
@@ -139,6 +141,32 @@ func NewBalancedTree(array []string) Tree {
 		newList.InsertLast(*resTree)
 	}
 	return newList.RemoveFirst()
+}
+
+func (t *Tree) isBalanced() bool {
+	if checkHeight(t.root) == -1 {
+		return false
+	}
+	return true
+}
+
+func checkHeight(n *Node) int {
+	if n == nil {
+		return 0
+	}
+	leftChild := checkHeight(n.leftChild)
+	if leftChild == -1 {
+		return -1
+	}
+	rightChild := checkHeight(n.rightChild)
+	if rightChild == -1 {
+		return -1
+	}
+	currentDepth := rightChild - leftChild
+	if math.Abs(float64(currentDepth)) > 1 {
+		return -1
+	}
+	return int(math.Max(float64(leftChild), float64(rightChild))) + 1
 }
 
 // 2*i + 1  right child
