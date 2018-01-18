@@ -12,14 +12,14 @@ func TestGraphTraverse(t *testing.T) {
 	g.addVertex("F") // 5
 	g.addVertex("G") // 6
 	g.addVertex("H") // 7
-	g.addVertex("I") // 8
-	g.addEdge(0, 1)
-	g.addEdge(0, 2)
 	g.addEdge(0, 3)
 	g.addEdge(0, 4)
-	g.addEdge(1, 5)
-	g.addEdge(5, 7)
+	g.addEdge(1, 4)
+	g.addEdge(2, 5)
 	g.addEdge(3, 6)
-	g.addEdge(6, 8)
+	g.addEdge(4, 6)
+	g.addEdge(5, 7)
+	g.addEdge(6, 7)
 
+	g.topo()
 }
