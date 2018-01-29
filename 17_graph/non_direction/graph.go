@@ -10,6 +10,7 @@ type graph struct {
 	maxVertex   int
 	vertexList  []vertex
 	adjMat      [][]int
+	adjList     []list
 	vertexCount int
 }
 
@@ -19,10 +20,16 @@ func newGraph(maxVertex int) graph {
 		a := make([]int, maxVertex)
 		adjMat[i] = a
 	}
+	adjList := make([]list, maxVertex)
+	for i := 0; i < maxVertex; i++ {
+		l := newList()
+		adjList[i] = l
+	}
 	return graph{
 		maxVertex:   maxVertex,
 		vertexList:  make([]vertex, maxVertex),
 		adjMat:      adjMat,
+		adjList:     adjList,
 		vertexCount: 0,
 	}
 }
@@ -33,12 +40,41 @@ func (g *graph) addVertex(label string) {
 }
 
 func (g *graph) addEdge(start, end int) {
+	// add to adjMat
 	g.adjMat[start][end] = 1
 	g.adjMat[end][start] = 1
+	// add to adjList
+	g.adjList[start].add(&g.vertexList[end], end)
+	g.adjList[end].add(&g.vertexList[start], start)
+
 }
 
-func (g *graph) dfs() {
-	fmt.Println("======= Depth-first search =======")
+func (g *graph) dfsList() {
+	fmt.Println("======= Depth-first search (list) =======")
+	s := stack.NewIntStack(g.maxVertex)
+	g.vertexList[0].wasVisited = true
+	g.displayVertex(0)
+	s.Push(0)
+
+	for !s.IsEmpty() {
+		a, _ := s.Peek()
+		v := g.adjList[int(a)].find()
+		if v == -1 {
+			s.Pop()
+		} else {
+			g.vertexList[v].wasVisited = true
+			g.displayVertex(v)
+			s.Push(int64(v))
+		}
+	}
+	fmt.Println()
+	for i := 0; i < g.vertexCount; i++ {
+		g.vertexList[i].wasVisited = false
+	}
+}
+
+func (g *graph) dfsMatrix() {
+	fmt.Println("======= Depth-first search (matrix) =======")
 	s := stack.NewIntStack(g.maxVertex)
 	g.vertexList[0].wasVisited = true
 	g.displayVertex(0)

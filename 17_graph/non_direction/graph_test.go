@@ -22,7 +22,8 @@ func TestGraphTraverse(t *testing.T) {
 	g.addEdge(3, 6)
 	g.addEdge(6, 8)
 
-	g.dfs()
+	g.dfsMatrix()
+	g.dfsList()
 	g.bfs()
 }
 
