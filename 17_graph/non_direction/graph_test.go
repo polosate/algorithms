@@ -26,7 +26,7 @@ func TestGraphTraverse(t *testing.T) {
 	g.bfs()
 }
 
-func TestGraphMST(t *testing.T) {
+func TestGraphMSTDFS(t *testing.T) {
 	g := newGraph(5)
 	g.addVertex("A") // 0
 	g.addVertex("B") // 1
@@ -45,5 +45,27 @@ func TestGraphMST(t *testing.T) {
 	g.addEdge(2, 4)
 	g.addEdge(3, 4)
 
-	g.mst()
+	g.mstDfs()
+}
+
+func TestGraphMSTBFS(t *testing.T) {
+	g := newGraph(5)
+	g.addVertex("A") // 0
+	g.addVertex("B") // 1
+	g.addVertex("C") // 2
+	g.addVertex("D") // 3
+	g.addVertex("E") // 4
+
+	g.addEdge(0, 1)
+	g.addEdge(0, 2)
+	g.addEdge(0, 3)
+	g.addEdge(0, 4)
+	g.addEdge(1, 2)
+	g.addEdge(1, 3)
+	g.addEdge(1, 4)
+	g.addEdge(2, 3)
+	g.addEdge(2, 4)
+	g.addEdge(3, 4)
+
+	g.mstBfs()
 }

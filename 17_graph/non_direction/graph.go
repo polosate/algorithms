@@ -85,8 +85,8 @@ func (g *graph) bfs() {
 	}
 }
 
-func (g *graph) mst() {
-	fmt.Println("======= Minimum spanning tree =======")
+func (g *graph) mstDfs() {
+	fmt.Println("======= Minimum spanning tree (depth-first search)=======")
 	s := stack.NewIntStack(g.maxVertex)
 	g.vertexList[0].wasVisited = true
 	s.Push(0)
@@ -99,6 +99,31 @@ func (g *graph) mst() {
 			g.vertexList[v].wasVisited = true
 			s.Push(int64(v))
 			g.displayVertex(int(current))
+			g.displayVertex(v)
+			fmt.Print(" ")
+		}
+	}
+	fmt.Println()
+	for i := 0; i < g.vertexCount; i++ {
+		g.vertexList[i].wasVisited = false
+	}
+}
+
+func (g *graph) mstBfs() {
+	fmt.Println("======= Minimum spanning tree (breadth-first search)=======")
+	q := newQueue(g.maxVertex)
+	g.vertexList[0].wasVisited = true
+	q.add(0)
+	for !q.IsEmpty() {
+		current := q.remove()
+		for {
+			v := g.getAdjUnvisitedVertex(current)
+			if v == -1 {
+				break
+			}
+			g.vertexList[v].wasVisited = true
+			q.add(v)
+			g.displayVertex(current)
 			g.displayVertex(v)
 			fmt.Print(" ")
 		}
