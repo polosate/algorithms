@@ -23,3 +23,19 @@ func TestGraphTraverse(t *testing.T) {
 
 	g.topo()
 }
+
+func TestGraphDFS(t *testing.T) {
+	g := newGraph(10)
+	g.addVertex("A") // 0
+	g.addVertex("B") // 1
+	g.addVertex("C") // 2
+	g.addVertex("D") // 3
+	g.addVertex("E") // 4
+	g.addEdge(0, 2)  // AC
+	g.addEdge(1, 0)  // BA
+	g.addEdge(1, 4)  // BE
+	g.addEdge(3, 4)  // DE
+	g.addEdge(4, 2)  // EC
+
+	g.dfs()
+}

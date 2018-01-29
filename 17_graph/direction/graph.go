@@ -2,6 +2,8 @@ package non_direction
 
 import (
 	"fmt"
+
+	"algorithms/03_stack"
 )
 
 type graph struct {
@@ -34,6 +36,39 @@ func (g *graph) addVertex(label string) {
 
 func (g *graph) addEdge(start, end int) {
 	g.adjMat[start][end] = 1
+}
+
+func (g *graph) dfs() {
+	for i := 0; i < g.vertexCount; i++ {
+		g.displayVertex(i)
+		g.vertexList[i].wasVisited = true
+		s := stack.NewIntStack(g.vertexCount)
+		s.Push(int64(i))
+		for !s.IsEmpty() {
+			a, _ := s.Peek()
+			v := g.getAdjUnvisitedVerte(int(a))
+			if v == -1 {
+				s.Pop()
+			} else {
+				g.vertexList[v].wasVisited = true
+				g.displayVertex(v)
+				s.Push(int64(v))
+			}
+		}
+		fmt.Println()
+		for j := 0; j < g.vertexCount; j++ {
+			g.vertexList[j].wasVisited = false
+		}
+	}
+}
+
+func (g *graph) getAdjUnvisitedVerte(i int) int {
+	for j := 0; j < g.vertexCount; j++ {
+		if g.adjMat[i][j] == 1 && !g.vertexList[j].wasVisited {
+			return j
+		}
+	}
+	return -1
 }
 
 func (g *graph) topo() {
